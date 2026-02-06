@@ -1,2 +1,3 @@
-# create-a-clash-royale-companion-site-legal-access-guides
-Exported from Caffeine project: Create a Clash Royale companion site (legal access + guides)
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

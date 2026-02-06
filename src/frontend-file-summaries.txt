@@ -1,0 +1,19 @@
+{
+  "frontend/src/App.tsx": "Main application component with simple page-based routing, theme provider integration, and extended Page union to include the new 'fred-chat' page.",
+  "frontend/src/components/SiteLayout.tsx": "Responsive layout component with header navigation (now including \"Ask Fred\" link for all users), mobile menu with close-on-navigation behavior, and footer with legal disclaimers and creator attribution.",
+  "frontend/src/components/LoginButton.tsx": "Internet Identity login/logout button component with loading states and query cache clearing on logout.",
+  "frontend/src/components/ContentSection.tsx": "Reusable wrapper component for content sections with consistent prose styling using Tailwind typography.",
+  "frontend/src/components/FeedbackForm.tsx": "Feedback submission form with validation (required message, 1000 char limit) using shadcn/ui components and React Query mutation.",
+  "frontend/src/pages/HomePage.tsx": "Homepage with hero section, game description, official download links, feature cards, and legal disclaimer notice.",
+  "frontend/src/pages/BeginnerGuidePage.tsx": "Comprehensive beginner guide covering elixir management, tower mechanics, basic strategy, and win conditions with card-based layout.",
+  "frontend/src/pages/DeckTipsPage.tsx": "Deck building tips page with 6 actionable tips, archetype explanations, and a new \"Example Decks\" section featuring 8 complete deck compositions with cards, gameplan, strengths, and weaknesses.",
+  "frontend/src/pages/AboutPage.tsx": "About page with mission statement, legal notices, disclaimers, and embedded feedback form for user submissions.",
+  "frontend/src/pages/AdminFeedbackPage.tsx": "Admin-only page for viewing feedback submissions with authentication checks and access control using Internet Identity.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for fetching caller user role and all feedback submissions from the backend.",
+  "frontend/src/hooks/useSubmitFeedback.ts": "React Query mutation hook for submitting feedback with automatic cache invalidation.",
+  "frontend/src/content/disclaimer.ts": "Centralized disclaimer text constants including the new FRED_DISCLAIMER for the offline helper's limited knowledge and no-bypass stance.",
+  "frontend/src/index.css": "Global styles with warm orange/charcoal OKLCH color palette for both light and dark modes, avoiding blue/purple primary colors.",
+  "frontend/tailwind.config.js": "Tailwind configuration with custom warm color palette, Inter font family, and extended design tokens matching the theme.",
+  "frontend/src/utils/fredKnowledgeBase.ts": "Client-side deterministic Q&A responder for Clash Royale basics with predefined answers about elixir, win conditions, deck archetypes, and spells, plus safety checks to refuse bypass/unblock requests.",
+  "frontend/src/pages/FredChatPage.tsx": "Chat interface page for \"Ask Fred\" featuring a transcript UI with user/Fred message differentiation, textarea input with Enter-to-send and Shift+Enter-for-newline, session-persisted chat state, and an informative disclaimer."
+}

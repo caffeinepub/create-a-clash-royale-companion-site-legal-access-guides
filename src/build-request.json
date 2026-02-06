@@ -1,0 +1,107 @@
+{
+  "kind": "build_request",
+  "title": "Add an in-site 'Fred' Q&A chat assistant (offline, no external AI)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-8",
+      "text": "Add a new user-facing chat page that introduces a free assistant named \"Fred\" and lets users ask questions about Clash Royale in a chat-style interface (message history + text input + send action).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "Ok I want it to have a free Ai named Fred built in that you can ask questions"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A new top-level page exists in the app for asking questions (e.g., \"Ask Fred\") and is reachable from the site navigation on both desktop and mobile.",
+        "The page shows a chat transcript UI with clearly differentiated user vs. Fred messages.",
+        "Users can type a message and send it via a button and by pressing Enter (without losing multi-line capability if supported).",
+        "The chat persists for the current session at minimum (e.g., in React state); reloading the page may clear it unless explicit persistence is implemented.",
+        "All user-facing text on the page is in English and references the assistant name \"Fred\"."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Implement Fred responses locally (no network calls) using a deterministic rules/FAQ knowledge base focused on Clash Royale fundamentals, decks, and site content, with safe fallbacks for unknown questions.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "Ok I want it to have a free Ai named Fred built in that you can ask questions"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Fred responses are generated entirely client-side without calling any third-party AI/LLM APIs or external services.",
+        "Fred can answer a basic set of predefined Clash Royale questions (at least: elixir, win conditions, what a cycle deck is, what beatdown/control/siege/bridge spam are, and how to pick spells) with clear, helpful English responses.",
+        "For questions Fred cannot answer, Fred replies with an honest fallback (e.g., that it only knows a limited set of Clash Royale topics) and suggests relevant existing site sections (Beginner Guide / Deck Tips) and/or official links, without claiming to browse the web.",
+        "Fred does not provide instructions or methods to bypass restrictions, access controls, or “unblocked” gameplay; if prompted, Fred responds with a refusal aligned with the site’s existing legal notice."
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Update the app’s simple page-based routing and SiteLayout navigation types to include the new Fred chat page while keeping the existing pages and admin-only navigation behavior intact.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "Ok I want it to have a free Ai named Fred built in that you can ask questions"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The App page union/type is extended to include the new Fred page and the page renders correctly when selected.",
+        "SiteLayout navigation includes the new Fred page link for all users, and the Admin link still only appears for admins.",
+        "Navigation works correctly on desktop and mobile (mobile menu closes on navigation as it does for other pages)."
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Add an on-page disclaimer on the Fred chat page stating that Fred is an offline helper with limited knowledge, provides informational guidance only, and is not affiliated with Supercell; also reiterate that the site does not provide “unblocked” gameplay or bypass methods.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "Ok I want it to have a free Ai named Fred built in that you can ask questions"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The Fred page includes a clearly visible disclaimer section in English.",
+        "The disclaimer aligns with the site’s existing stance (no hosting/embedding/bypass) and avoids implying the chat can access restricted content or provide circumvention instructions.",
+        "The disclaimer does not block normal chat usage (it is informative, not a modal that must be dismissed)."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not integrate any third-party AI/LLM services (no OpenAI/Anthropic/etc.) or any external network calls to generate Fred responses.",
+    "Do not add any functionality that hosts, embeds, proxies, or bypasses restrictions/access controls for Clash Royale (“unblocked” gameplay).",
+    "Respect the existing frontend immutable paths; do not edit any files under frontend/src/components/ui or the listed immutable hook files.",
+    "Keep the backend as a single Motoko actor; do not introduce additional backend services."
+  ],
+  "nonGoals": [
+    "Building a real AI model, LLM-backed chatbot, or any internet-browsing assistant.",
+    "User-to-user chat, real-time messaging, or WebSocket-based features.",
+    "Storing chat logs permanently on the backend (unless explicitly requested later)."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "Build a website that provides access to \"Clash Royale unblocked\" for the user.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-do-not-implement-host-embed-proxy-or-provide-any-mechanism-to-bypass-network-restrictions-paywalls-or-access-controls-unblocked-gameplay-for-clash-royale-instead-present-a-clear-message-that-the-site-only-provides-legal-official-access-options-and-informational-content",
+      "title": "Do not implement, host, embed, proxy, or provide any mechanism to bypass network restrictions, paywalls, or access controls (“unblocked” gameplay) for Clash Royale; instead, present a clear message that the site only provides legal, official access options and informational content.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-responsive-public-website-with-a-homepage-that-provides-a-a-brief-description-of-clash-royale-b-prominent-buttons-linking-to-official-ways-to-play-e-g-official-app-store-pages-and-the-official-clash-royale-website-and-c-a-simple-navigation-layout-home-beginner-guide-deck-tips-about",
+      "title": "Build a responsive public website with a homepage that provides (a) a brief description of Clash Royale, (b) prominent buttons linking to official ways to play (e.g., official app store pages and the official Clash Royale website), and (c) a simple navigation layout (Home, Beginner Guide, Deck Tips, About).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-static-content-pages-sections-in-english-a-beginner-guide-basic-mechanics-elixir-towers-win-conditions-and-deck-tips-general-principles-like-average-elixir-synergy-counters",
+      "title": "Add static content pages/sections in English: a Beginner Guide (basic mechanics, elixir, towers, win conditions) and Deck Tips (general principles like average elixir, synergy, counters).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-and-apply-a-coherent-distinct-visual-theme-colors-typography-spacing-components-appropriate-for-a-competitive-card-battle-game-companion-site-avoid-using-blue-purple-as-the-primary-palette",
+      "title": "Create and apply a coherent, distinct visual theme (colors, typography, spacing, components) appropriate for a competitive card-battle game companion site; avoid using blue/purple as the primary palette.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-lightweight-optional-feedback-form-name-email-optional-message-that-stores-submissions-in-the-motoko-backend-for-later-review",
+      "title": "Add a lightweight optional feedback form (name/email optional + message) that stores submissions in the Motoko backend for later review.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-expand-the-deck-tips-page-by-adding-a-new-section-that-lists-multiple-concrete-example-decks-more-than-what-exists-today-as-static-content-with-each-deck-including-deck-name-archetype-approximate-average-elixir-a-list-of-the-8-cards-as-text-and-short-bullet-points-for-basic-gameplan-and-key-strengths-weaknesses",
+      "title": "Expand the \"Deck Tips\" page by adding a new section that lists multiple concrete example decks (more than what exists today) as static content, with each deck including: deck name, archetype, approximate average elixir, a list of the 8 cards (as text), and short bullet points for basic gameplan and key strengths/weaknesses.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-visible-site-attribution-text-stating-created-by-franklin-holmes-and-lincoln-wood-in-a-consistent-non-intrusive-location-on-the-site-e-g-within-the-global-footer-so-it-appears-across-all-pages",
+      "title": "Add visible site attribution text stating: \"Created by Franklin Holmes and Lincoln Wood\" in a consistent, non-intrusive location on the site (e.g., within the global footer) so it appears across all pages.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-new-user-facing-chat-page-that-introduces-a-free-assistant-named-fred-and-lets-users-ask-questions-about-clash-royale-in-a-chat-style-interface-message-history-text-input-send-action",
+      "title": "Add a new user-facing chat page that introduces a free assistant named \"Fred\" and lets users ask questions about Clash Royale in a chat-style interface (message history + text input + send action).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-fred-responses-locally-no-network-calls-using-a-deterministic-rules-faq-knowledge-base-focused-on-clash-royale-fundamentals-decks-and-site-content-with-safe-fallbacks-for-unknown-questions",
+      "title": "Implement Fred responses locally (no network calls) using a deterministic rules/FAQ knowledge base focused on Clash Royale fundamentals, decks, and site content, with safe fallbacks for unknown questions.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-app-s-simple-page-based-routing-and-sitelayout-navigation-types-to-include-the-new-fred-chat-page-while-keeping-the-existing-pages-and-admin-only-navigation-behavior-intact",
+      "title": "Update the app’s simple page-based routing and SiteLayout navigation types to include the new Fred chat page while keeping the existing pages and admin-only navigation behavior intact.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-on-page-disclaimer-on-the-fred-chat-page-stating-that-fred-is-an-offline-helper-with-limited-knowledge-provides-informational-guidance-only-and-is-not-affiliated-with-supercell-also-reiterate-that-the-site-does-not-provide-unblocked-gameplay-or-bypass-methods",
+      "title": "Add an on-page disclaimer on the Fred chat page stating that Fred is an offline helper with limited knowledge, provides informational guidance only, and is not affiliated with Supercell; also reiterate that the site does not provide “unblocked” gameplay or bypass methods.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a site that hosts/provides access to Clash Royale in an \"unblocked\" manner.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add more Deck Tips/deck examples to the site (create additional decks content).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add site attribution/credits text stating it was created by Franklin Holmes and Lincoln Wood.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add an in-site free AI chat assistant named \"Fred\" that users can ask Clash Royale questions.",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Create a Clash Royale companion site (legal access + guides)",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
