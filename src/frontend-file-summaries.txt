@@ -15,5 +15,7 @@
   "frontend/src/index.css": "Global styles with warm orange/charcoal OKLCH color palette for both light and dark modes, avoiding blue/purple primary colors.",
   "frontend/tailwind.config.js": "Tailwind configuration with custom warm color palette, Inter font family, and extended design tokens matching the theme.",
   "frontend/src/utils/fredKnowledgeBase.ts": "Client-side deterministic Q&A responder for Clash Royale basics with predefined answers about elixir, win conditions, deck archetypes, and spells, plus safety checks to refuse bypass/unblock requests.",
-  "frontend/src/pages/FredChatPage.tsx": "Chat interface page for \"Ask Fred\" featuring a transcript UI with user/Fred message differentiation, textarea input with Enter-to-send and Shift+Enter-for-newline, session-persisted chat state, and an informative disclaimer."
+  "frontend/src/pages/FredChatPage.tsx": "Chat interface page for Ask Fred with conditional welcome screen on first visit (session-persisted), \"About Fred\" button to reopen intro, and existing chat functionality with disclaimer.",
+  "frontend/src/hooks/useSessionFlag.ts": "Custom React hook that persists a boolean flag in sessionStorage, allowing state to survive navigation within the same browser session.",
+  "frontend/src/components/FredWelcomeIntro.tsx": "Welcome screen component for Ask Fred featuring an introduction, four example topic cards with icons, and a prominent \"Start Chatting\" button."
 }

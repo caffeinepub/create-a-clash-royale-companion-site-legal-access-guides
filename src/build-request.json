@@ -1,107 +1,57 @@
 {
   "kind": "build_request",
-  "title": "Add an in-site 'Fred' Q&A chat assistant (offline, no external AI)",
+  "title": "Add a simple welcome screen to the Ask Fred chat page",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-8",
-      "text": "Add a new user-facing chat page that introduces a free assistant named \"Fred\" and lets users ask questions about Clash Royale in a chat-style interface (message history + text input + send action).",
+      "id": "REQ-12",
+      "text": "Add a simple, user-friendly welcome/intro screen to the \"Ask Fred\" page (FredChatPage) that clearly explains what users can ask and provides a clear call-to-action to start chatting.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-5"
         ],
         "quotes": [
-          "Ok I want it to have a free Ai named Fred built in that you can ask questions"
+          "Yes"
         ]
       },
       "acceptanceCriteria": [
-        "A new top-level page exists in the app for asking questions (e.g., \"Ask Fred\") and is reachable from the site navigation on both desktop and mobile.",
-        "The page shows a chat transcript UI with clearly differentiated user vs. Fred messages.",
-        "Users can type a message and send it via a button and by pressing Enter (without losing multi-line capability if supported).",
-        "The chat persists for the current session at minimum (e.g., in React state); reloading the page may clear it unless explicit persistence is implemented.",
-        "All user-facing text on the page is in English and references the assistant name \"Fred\"."
+        "When a user opens the Ask Fred page, they see an intro/welcome view before the chat history (at least on first visit).",
+        "The welcome view includes English user-facing text that communicates: (1) Fred is a Clash Royale strategy helper, (2) example topics users can ask about (e.g., elixir, win conditions, deck archetypes, spell choices), and (3) a prominent action (e.g., \"Start chatting\") that takes the user into the chat UI.",
+        "After the user dismisses/starts the chat from the welcome view, the normal chat UI is shown and the input is focused.",
+        "The existing disclaimer remains visible and unchanged in meaning (still states Fred is offline/limited knowledge, informational only, not affiliated with Supercell, and no unblocked/bypass help)."
       ]
     },
     {
-      "id": "REQ-9",
-      "text": "Implement Fred responses locally (no network calls) using a deterministic rules/FAQ knowledge base focused on Clash Royale fundamentals, decks, and site content, with safe fallbacks for unknown questions.",
+      "id": "REQ-13",
+      "text": "Persist the Ask Fred welcome/intro screen dismissal so it does not reappear every time the user navigates away and back during typical use.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-5"
         ],
         "quotes": [
-          "Ok I want it to have a free Ai named Fred built in that you can ask questions"
+          "Yes"
         ]
       },
       "acceptanceCriteria": [
-        "Fred responses are generated entirely client-side without calling any third-party AI/LLM APIs or external services.",
-        "Fred can answer a basic set of predefined Clash Royale questions (at least: elixir, win conditions, what a cycle deck is, what beatdown/control/siege/bridge spam are, and how to pick spells) with clear, helpful English responses.",
-        "For questions Fred cannot answer, Fred replies with an honest fallback (e.g., that it only knows a limited set of Clash Royale topics) and suggests relevant existing site sections (Beginner Guide / Deck Tips) and/or official links, without claiming to browse the web.",
-        "Fred does not provide instructions or methods to bypass restrictions, access controls, or “unblocked” gameplay; if prompted, Fred responds with a refusal aligned with the site’s existing legal notice."
-      ]
-    },
-    {
-      "id": "REQ-10",
-      "text": "Update the app’s simple page-based routing and SiteLayout navigation types to include the new Fred chat page while keeping the existing pages and admin-only navigation behavior intact.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "Ok I want it to have a free Ai named Fred built in that you can ask questions"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The App page union/type is extended to include the new Fred page and the page renders correctly when selected.",
-        "SiteLayout navigation includes the new Fred page link for all users, and the Admin link still only appears for admins.",
-        "Navigation works correctly on desktop and mobile (mobile menu closes on navigation as it does for other pages)."
-      ]
-    },
-    {
-      "id": "REQ-11",
-      "text": "Add an on-page disclaimer on the Fred chat page stating that Fred is an offline helper with limited knowledge, provides informational guidance only, and is not affiliated with Supercell; also reiterate that the site does not provide “unblocked” gameplay or bypass methods.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "Ok I want it to have a free Ai named Fred built in that you can ask questions"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The Fred page includes a clearly visible disclaimer section in English.",
-        "The disclaimer aligns with the site’s existing stance (no hosting/embedding/bypass) and avoids implying the chat can access restricted content or provide circumvention instructions.",
-        "The disclaimer does not block normal chat usage (it is informative, not a modal that must be dismissed)."
+        "After the user starts/dismisses the welcome screen once, revisiting the Ask Fred page within the same browser session does not show the welcome screen again (chat UI appears directly).",
+        "Provide a simple way to re-open the intro (e.g., a small \"About Fred\" / \"Show intro\" action) without interfering with chat usage."
       ]
     }
   ],
   "constraints": [
-    "Do not integrate any third-party AI/LLM services (no OpenAI/Anthropic/etc.) or any external network calls to generate Fred responses.",
-    "Do not add any functionality that hosts, embeds, proxies, or bypasses restrictions/access controls for Clash Royale (“unblocked” gameplay).",
-    "Respect the existing frontend immutable paths; do not edit any files under frontend/src/components/ui or the listed immutable hook files.",
-    "Keep the backend as a single Motoko actor; do not introduce additional backend services."
+    "Do not add any network calls or external AI integrations for Fred; keep responses fully local and deterministic.",
+    "Do not implement or suggest any method to bypass network restrictions/paywalls/access controls or provide “unblocked” gameplay.",
+    "Do not edit files under frontend/src/components/ui (Shadcn UI sources) or other paths listed as immutable in SYSTEM_CONTEXT."
   ],
   "nonGoals": [
-    "Building a real AI model, LLM-backed chatbot, or any internet-browsing assistant.",
-    "User-to-user chat, real-time messaging, or WebSocket-based features.",
-    "Storing chat logs permanently on the backend (unless explicitly requested later)."
+    "Changing the Fred knowledge base content/logic beyond what is required to support the welcome screen.",
+    "Adding user accounts, saving chat history to the backend, or any real-time/multiplayer functionality.",
+    "Redesigning global site navigation or changing existing pages beyond the Ask Fred page behavior."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

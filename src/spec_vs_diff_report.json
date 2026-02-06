@@ -1,43 +1,26 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T14:57:38.525Z",
-  "summary": "The diff adds a new \"Ask Fred\" chat page, updates App routing and SiteLayout navigation to include it, adds a client-side deterministic knowledge base utility, and adds an on-page Fred disclaimer. However, based on the truncated evidence, some REQ-9 acceptance criteria (spells guidance and unknown-question fallback that suggests specific site sections) cannot be confirmed. The diff also appears to introduce additional unrelated changes (e.g., Deck Tips expansion, theme updates) not requested in this BuildRequest.",
+  "generatedAt": "2026-02-06T15:01:53.484Z",
+  "summary": "The diff adds a dedicated welcome/intro component for the Ask Fred page, shows it on first visit, persists dismissal in sessionStorage, provides an “About Fred” control to reopen the intro, and focuses the chat input after starting chat. Disclaimer rendering appears to remain in place, but the diff is truncated where the disclaimer is shown so exact text/meaning preservation cannot be fully verified from provided evidence.",
   "missing_requirements": [
     {
-      "id": "REQ-9",
-      "requirement": "Fred can answer predefined questions including how to pick spells, and for unknown questions provides an honest fallback that suggests relevant existing site sections (Beginner Guide / Deck Tips) and/or official links.",
-      "reason": "The knowledge base file is truncated and the visible portion shows answers for elixir, win conditions, cycle deck, and archetypes (beatdown/control/siege/bridge spam), but does not show an entry for spell selection or the unknown-question fallback behavior that suggests site sections like Beginner Guide / Deck Tips.",
+      "id": "REQ-12",
+      "requirement": "The existing disclaimer remains visible and unchanged in meaning (offline/limited knowledge, informational only, not affiliated with Supercell, and no unblocked/bypass help).",
+      "reason": "FredChatPage shows the disclaimer component, but the diff is truncated mid-render so it is not possible to confirm from the provided snippet that the disclaimer text is unchanged in meaning and still includes all required statements.",
       "evidence": [
-        "frontend/src/utils/fredKnowledgeBase.ts (truncated)"
+        "frontend/src/pages/FredChatPage.tsx (truncated around disclaimer render)",
+        "frontend/src/pages/FredChatPage.tsx (imports FRED_DISCLAIMER)"
       ]
     }
   ],
-  "hallucinated_features": [
-    {
-      "description": "Expanded Deck Tips page with a new \"Example Decks\" section containing 8 complete deck compositions.",
-      "reason": "This change is described in the diff summary but is not requested by REQ-8..REQ-11 (which only concern adding an offline Fred chat assistant page, routing/nav updates, local responses, and a disclaimer).",
-      "evidence": [
-        "frontend-file-summaries.txt (frontend/src/pages/DeckTipsPage.tsx description)"
-      ]
-    },
-    {
-      "description": "Global visual theme updates (new warm orange/charcoal palette) and Tailwind config design token extensions.",
-      "reason": "Not requested by REQ-8..REQ-11; these requirements are specific to adding the Fred chat assistant and related navigation/disclaimer behavior.",
-      "evidence": [
-        "frontend-file-summaries.txt (frontend/src/index.css description)",
-        "frontend-file-summaries.txt (frontend/tailwind.config.js description)"
-      ]
-    }
-  ],
-  "confidence": 0.62,
+  "hallucinated_features": [],
+  "confidence": 0.72,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/App.tsx",
-    "frontend/src/components/SiteLayout.tsx",
-    "frontend/src/content/disclaimer.ts",
+    "frontend/src/components/FredWelcomeIntro.tsx",
+    "frontend/src/hooks/useSessionFlag.ts",
     "frontend/src/pages/FredChatPage.tsx",
-    "frontend/src/utils/fredKnowledgeBase.ts",
     "project_state.json"
   ]
 }

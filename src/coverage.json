@@ -1,64 +1,38 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T14:57:38.529Z",
+  "generatedAt": "2026-02-06T15:01:53.488Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 4,
-    "implemented": 4,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-10",
-        "summary": "Update the app’s simple page-based routing and SiteLayout navigation types to include the new Fred chat page while keeping the existing pages and admin-only navigation behavior intact.",
+        "id": "REQ-12",
+        "summary": "Add a simple, user-friendly welcome/intro screen to the \"Ask Fred\" page (FredChatPage) that clearly explains what users can ask and provides a clear call-to-action to start chatting.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/App.tsx",
-          "frontend/src/components/SiteLayout.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/App.tsx",
-          "frontend/src/components/SiteLayout.tsx"
-        ]
-      },
-      {
-        "id": "REQ-11",
-        "summary": "Add an on-page disclaimer on the Fred chat page stating that Fred is an offline helper with limited knowledge, provides informational guidance only, and is not affiliated with Supercell; also reiterate that the site does not provide “unblocked” gameplay or bypass methods.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/FredChatPage.tsx",
-          "frontend/src/content/disclaimer.ts"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/FredChatPage.tsx",
-          "frontend/src/content/disclaimer.ts"
-        ]
-      },
-      {
-        "id": "REQ-8",
-        "summary": "Add a new user-facing chat page that introduces a free assistant named \"Fred\" and lets users ask questions about Clash Royale in a chat-style interface (message history + text input + send action).",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/FredChatPage.tsx",
-          "frontend/src/App.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/FredChatPage.tsx",
-          "frontend/src/App.tsx"
-        ]
-      },
-      {
-        "id": "REQ-9",
-        "summary": "Implement Fred responses locally (no network calls) using a deterministic rules/FAQ knowledge base focused on Clash Royale fundamentals, decks, and site content, with safe fallbacks for unknown questions.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/utils/fredKnowledgeBase.ts",
+          "frontend/src/components/FredWelcomeIntro.tsx",
           "frontend/src/pages/FredChatPage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/utils/fredKnowledgeBase.ts",
+          "frontend/src/components/FredWelcomeIntro.tsx",
+          "frontend/src/pages/FredChatPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-13",
+        "summary": "Persist the Ask Fred welcome/intro screen dismissal so it does not reappear every time the user navigates away and back during typical use.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useSessionFlag.ts",
+          "frontend/src/pages/FredChatPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useSessionFlag.ts",
           "frontend/src/pages/FredChatPage.tsx"
         ]
       }
@@ -66,15 +40,12 @@
   },
   "changedFiles": [
     "build-request.json",
-    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/App.tsx",
-    "frontend/src/components/SiteLayout.tsx",
-    "frontend/src/content/disclaimer.ts",
+    "frontend/src/components/FredWelcomeIntro.tsx",
+    "frontend/src/hooks/useSessionFlag.ts",
     "frontend/src/pages/FredChatPage.tsx",
-    "frontend/src/utils/fredKnowledgeBase.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

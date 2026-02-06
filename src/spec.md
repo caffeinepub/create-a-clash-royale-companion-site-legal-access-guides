@@ -1,14 +1,13 @@
 # Specification
 
 ## Summary
-**Goal:** Add a new in-site “Ask Fred” chat page where users can ask Clash Royale questions and receive offline, deterministic FAQ-style responses (no external AI).
+**Goal:** Add a simple, user-friendly welcome/intro screen to the Ask Fred (FredChatPage) experience that explains what Fred can help with and provides a clear way to start chatting.
 
 **Planned changes:**
-- Add a new top-level “Ask Fred” page reachable from the main site navigation on desktop and mobile.
-- Implement a chat-style UI on the Fred page (message history, user input, send via button and Enter; user vs. Fred messages clearly differentiated) with session-only persistence.
-- Create a client-side, deterministic rules/FAQ knowledge base for Fred focused on Clash Royale fundamentals (including elixir, win conditions, cycle decks, beatdown/control/siege/bridge spam, and choosing spells) plus safe fallbacks for unknown questions.
-- Add refusal behavior for requests related to bypassing restrictions or “unblocked” gameplay, aligned with the site’s legal stance.
-- Update page routing/types and SiteLayout navigation to include the Fred page while keeping existing pages and admin-only navigation behavior intact.
-- Add an on-page disclaimer stating Fred is an offline helper with limited knowledge, provides informational guidance only, is not affiliated with Supercell, and does not provide “unblocked” gameplay or bypass methods.
+- Add an intro/welcome view that appears before the chat UI (at least on first visit) with English text describing Fred as a Clash Royale strategy helper and example topics users can ask about.
+- Provide a prominent “Start chatting” action that dismisses the intro, shows the normal chat UI, and focuses the input.
+- Persist the intro dismissal for the current browser session so returning to Ask Fred doesn’t repeatedly show the intro during typical use.
+- Add a small, non-intrusive action (e.g., “About Fred” / “Show intro”) to re-open the intro on demand.
+- Ensure the existing disclaimer remains visible and unchanged in meaning.
 
-**User-visible outcome:** Users can open an “Ask Fred” page from the site navigation and chat with Fred to get offline Clash Royale guidance; unsupported or disallowed requests receive clear fallback/refusal responses along with helpful pointers to relevant site sections.
+**User-visible outcome:** On first opening Ask Fred, users see a brief intro explaining what to ask and a clear button to start; after dismissing it, the chat opens with the input focused and the intro stays hidden for the session, with an option to view it again.

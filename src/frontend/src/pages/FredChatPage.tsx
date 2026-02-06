@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send } from 'lucide-react';
+import { Send, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -7,6 +7,8 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { getFredResponse } from '../utils/fredKnowledgeBase';
 import { FRED_DISCLAIMER } from '../content/disclaimer';
+import { useSessionFlag } from '../hooks/useSessionFlag';
+import FredWelcomeIntro from '../components/FredWelcomeIntro';
 
 interface Message {
   id: string;
@@ -16,6 +18,8 @@ interface Message {
 }
 
 export default function FredChatPage() {
+  const [introDismissed, setIntroDismissed] = useSessionFlag('fred-intro-dismissed', false);
+  const [showIntro, setShowIntro] = useState(!introDismissed);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '0',
@@ -38,6 +42,19 @@ export default function FredChatPage() {
       }
     }
   }, [messages]);
+
+  const handleStartChat = () => {
+    setShowIntro(false);
+    setIntroDismissed(true);
+    // Focus the input after a brief delay to ensure the chat UI is rendered
+    setTimeout(() => {
+      textareaRef.current?.focus();
+    }, 100);
+  };
+
+  const handleShowIntro = () => {
+    setShowIntro(true);
+  };
 
   const handleSend = () => {
     if (!input.trim() || isProcessing) return;
@@ -79,10 +96,25 @@ export default function FredChatPage() {
   return (
     <div className="container max-w-4xl py-8 px-4">
       <div className="mb-6">
-        <h1 className="text-4xl font-bold mb-2">Ask Fred</h1>
-        <p className="text-muted-foreground">
-          Your friendly Clash Royale strategy assistant
-        </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-4xl font-bold mb-2">Ask Fred</h1>
+            <p className="text-muted-foreground">
+              Your friendly Clash Royale strategy assistant
+            </p>
+          </div>
+          {!showIntro && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleShowIntro}
+              className="gap-2"
+            >
+              <Info className="h-4 w-4" />
+              About Fred
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Disclaimer */}
@@ -92,88 +124,92 @@ export default function FredChatPage() {
         </AlertDescription>
       </Alert>
 
-      {/* Chat Interface */}
-      <Card className="h-[600px] flex flex-col">
-        <CardHeader className="border-b">
-          <CardTitle>Chat with Fred</CardTitle>
-          <CardDescription>
-            Ask about elixir, win conditions, deck archetypes, and more
-          </CardDescription>
-        </CardHeader>
+      {/* Welcome Intro or Chat Interface */}
+      {showIntro ? (
+        <FredWelcomeIntro onStartChat={handleStartChat} />
+      ) : (
+        <Card className="h-[600px] flex flex-col">
+          <CardHeader className="border-b">
+            <CardTitle>Chat with Fred</CardTitle>
+            <CardDescription>
+              Ask about elixir, win conditions, deck archetypes, and more
+            </CardDescription>
+          </CardHeader>
 
-        <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
-          {/* Messages */}
-          <ScrollArea ref={scrollAreaRef} className="flex-1 p-4">
-            <div className="space-y-4">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
+          <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
+            {/* Messages */}
+            <ScrollArea ref={scrollAreaRef} className="flex-1 p-4">
+              <div className="space-y-4">
+                {messages.map((message) => (
                   <div
-                    className={`max-w-[80%] rounded-lg px-4 py-3 ${
-                      message.role === 'user'
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted'
-                    }`}
+                    key={message.id}
+                    className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-semibold">
-                        {message.role === 'user' ? 'You' : 'Fred'}
-                      </span>
-                      <span className="text-xs opacity-70">
-                        {message.timestamp.toLocaleTimeString([], { 
-                          hour: '2-digit', 
-                          minute: '2-digit' 
-                        })}
-                      </span>
+                    <div
+                      className={`max-w-[80%] rounded-lg px-4 py-3 ${
+                        message.role === 'user'
+                          ? 'bg-primary text-primary-foreground'
+                          : 'bg-muted'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-xs font-semibold">
+                          {message.role === 'user' ? 'You' : 'Fred'}
+                        </span>
+                        <span className="text-xs opacity-70">
+                          {message.timestamp.toLocaleTimeString([], { 
+                            hour: '2-digit', 
+                            minute: '2-digit' 
+                          })}
+                        </span>
+                      </div>
+                      <p className="text-sm whitespace-pre-wrap leading-relaxed">
+                        {message.content}
+                      </p>
                     </div>
-                    <p className="text-sm whitespace-pre-wrap leading-relaxed">
-                      {message.content}
-                    </p>
                   </div>
-                </div>
-              ))}
-              {isProcessing && (
-                <div className="flex justify-start">
-                  <div className="max-w-[80%] rounded-lg px-4 py-3 bg-muted">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-semibold">Fred</span>
+                ))}
+                {isProcessing && (
+                  <div className="flex justify-start">
+                    <div className="max-w-[80%] rounded-lg px-4 py-3 bg-muted">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-xs font-semibold">Fred</span>
+                      </div>
+                      <p className="text-sm text-muted-foreground">Thinking...</p>
                     </div>
-                    <p className="text-sm text-muted-foreground">Thinking...</p>
                   </div>
-                </div>
-              )}
-            </div>
-          </ScrollArea>
+                )}
+              </div>
+            </ScrollArea>
 
-          {/* Input Area */}
-          <div className="border-t p-4">
-            <div className="flex gap-2">
-              <Textarea
-                ref={textareaRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Ask Fred a question... (Press Enter to send, Shift+Enter for new line)"
-                className="min-h-[60px] max-h-[120px] resize-none"
-                disabled={isProcessing}
-              />
-              <Button
-                onClick={handleSend}
-                disabled={!input.trim() || isProcessing}
-                size="icon"
-                className="h-[60px] w-[60px] shrink-0"
-              >
-                <Send className="h-5 w-5" />
-              </Button>
+            {/* Input Area */}
+            <div className="border-t p-4">
+              <div className="flex gap-2">
+                <Textarea
+                  ref={textareaRef}
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Ask Fred a question... (Press Enter to send, Shift+Enter for new line)"
+                  className="min-h-[60px] max-h-[120px] resize-none"
+                  disabled={isProcessing}
+                />
+                <Button
+                  onClick={handleSend}
+                  disabled={!input.trim() || isProcessing}
+                  size="icon"
+                  className="h-[60px] w-[60px] shrink-0"
+                >
+                  <Send className="h-5 w-5" />
+                </Button>
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">
+                Fred is an offline helper with limited knowledge. For detailed guides, visit our Beginner Guide and Deck Tips pages.
+              </p>
             </div>
-            <p className="text-xs text-muted-foreground mt-2">
-              Fred is an offline helper with limited knowledge. For detailed guides, visit our Beginner Guide and Deck Tips pages.
-            </p>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }

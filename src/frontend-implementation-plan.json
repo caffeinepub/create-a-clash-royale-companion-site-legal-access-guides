@@ -1,92 +1,47 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Offline \"Fred\" Q&A chat assistant (client-side rules/FAQ)",
+  "title": "Ask Fred welcome/intro screen with session-persisted dismissal",
   "requirements": [
     {
-      "id": "REQ-8",
-      "summary": "Create a new \"Ask Fred\" chat page with a transcript UI, message input, and send actions (button + Enter) that persists for the current session.",
+      "id": "REQ-12",
+      "summary": "Show a welcome/intro view on the Ask Fred page before the chat UI, with clear examples and a prominent start action while keeping the existing disclaimer unchanged.",
       "acceptanceCriteria": [
-        "A new top-level page exists in the app for asking questions (e.g., \"Ask Fred\") and is reachable from the site navigation on both desktop and mobile.",
-        "The page shows a chat transcript UI with clearly differentiated user vs. Fred messages.",
-        "Users can type a message and send it via a button and by pressing Enter (without losing multi-line capability if supported).",
-        "The chat persists for the current session at minimum (e.g., in React state); reloading the page may clear it unless explicit persistence is implemented.",
-        "All user-facing text on the page is in English and references the assistant name \"Fred\"."
+        "When a user opens the Ask Fred page, they see an intro/welcome view before the chat history (at least on first visit).",
+        "The welcome view includes English user-facing text that communicates: (1) Fred is a Clash Royale strategy helper, (2) example topics users can ask about (e.g., elixir, win conditions, deck archetypes, spell choices), and (3) a prominent action (e.g., \"Start chatting\") that takes the user into the chat UI.",
+        "After the user dismisses/starts the chat from the welcome view, the normal chat UI is shown and the input is focused.",
+        "The existing disclaimer remains visible and unchanged in meaning (still states Fred is offline/limited knowledge, informational only, not affiliated with Supercell, and no unblocked/bypass help)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/FredChatPage.tsx",
+          "path": "frontend/src/components/FredWelcomeIntro.tsx",
           "operation": "create",
-          "description": "Add the new user-facing \"Ask Fred\" page implementing a chat-style transcript (user vs. Fred styling), message composer (Textarea for multi-line), and send behavior (button + Enter to send, Shift+Enter for new line). Use shadcn-ui components (e.g., Card/Button/Textarea) to match existing styling; verify the component's usage instructions before implementing."
+          "description": "Create a reusable welcome/intro panel component for Ask Fred with explanatory text, example question/topic list, and a prominent \"Start chatting\" CTA. Use existing shadcn-ui components (e.g., Card/Button) for consistent styling; verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/pages/FredChatPage.tsx",
           "operation": "modify",
-          "description": "Render the new Fred chat page from the app's simple page-based routing so it can be navigated to as a top-level page."
+          "description": "Add conditional rendering so first-time (per session) visitors see the new welcome/intro panel before the chat history. Ensure the existing disclaimer (FRED_DISCLAIMER) remains visible and unchanged in meaning. When the user clicks the CTA, transition to the chat UI and programmatically focus the message input (Textarea). Use existing shadcn-ui components already present on this page; verify the component's usage instructions before implementing."
         }
       ]
     },
     {
-      "id": "REQ-9",
-      "summary": "Generate Fred responses locally using deterministic FAQ/rules for Clash Royale fundamentals and provide safe fallbacks/refusals for unsupported or disallowed requests.",
+      "id": "REQ-13",
+      "summary": "Persist dismissal of the Ask Fred intro during the browser session and provide a non-intrusive way to re-open the intro.",
       "acceptanceCriteria": [
-        "Fred responses are generated entirely client-side without calling any third-party AI/LLM APIs or external services.",
-        "Fred can answer a basic set of predefined Clash Royale questions (at least: elixir, win conditions, what a cycle deck is, what beatdown/control/siege/bridge spam are, and how to pick spells) with clear, helpful English responses.",
-        "For questions Fred cannot answer, Fred replies with an honest fallback (e.g., that it only knows a limited set of Clash Royale topics) and suggests relevant existing site sections (Beginner Guide / Deck Tips) and/or official links, without claiming to browse the web.",
-        "Fred does not provide instructions or methods to bypass restrictions, access controls, or “unblocked” gameplay; if prompted, Fred responds with a refusal aligned with the site’s existing legal notice."
+        "After the user starts/dismisses the welcome screen once, revisiting the Ask Fred page within the same browser session does not show the welcome screen again (chat UI appears directly).",
+        "Provide a simple way to re-open the intro (e.g., a small \"About Fred\" / \"Show intro\" action) without interfering with chat usage."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/utils/fredKnowledgeBase.ts",
+          "path": "frontend/src/hooks/useSessionFlag.ts",
           "operation": "create",
-          "description": "Implement a deterministic, client-only rules/FAQ responder for Fred: normalize user questions, match against predefined Clash Royale topics (elixir, win conditions, cycle decks, beatdown/control/siege/bridge spam, spell selection), and return helpful English answers. Include safety checks that refuse requests about bypassing restrictions or \"unblocked\" gameplay and provide an honest limited-knowledge fallback that points users to Beginner Guide / Deck Tips and official resources (without claiming web access)."
+          "description": "Create a small hook to read/write a boolean flag in sessionStorage (e.g., intro dismissed) to persist state across navigation within the same browser session."
         },
         {
           "path": "frontend/src/pages/FredChatPage.tsx",
           "operation": "modify",
-          "description": "Wire the chat UI to call the local fredKnowledgeBase responder for every send action, append Fred messages to the transcript, and ensure no network calls are made to generate responses."
-        }
-      ]
-    },
-    {
-      "id": "REQ-10",
-      "summary": "Extend the app’s page union/routing and SiteLayout navigation to include the new Fred page while preserving existing pages and admin-only navigation behavior.",
-      "acceptanceCriteria": [
-        "The App page union/type is extended to include the new Fred page and the page renders correctly when selected.",
-        "SiteLayout navigation includes the new Fred page link for all users, and the Admin link still only appears for admins.",
-        "Navigation works correctly on desktop and mobile (mobile menu closes on navigation as it does for other pages)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Extend the Page union/type to include the new Fred page and update the page switch to render FredChatPage when selected."
-        },
-        {
-          "path": "frontend/src/components/SiteLayout.tsx",
-          "operation": "modify",
-          "description": "Add a new navigation item (e.g., \"Ask Fred\") visible to all users, while keeping the existing admin-only link behavior unchanged and preserving the current mobile-menu close-on-navigation behavior."
-        }
-      ]
-    },
-    {
-      "id": "REQ-11",
-      "summary": "Add an informative, on-page disclaimer on the Fred chat page clarifying offline/limited knowledge, informational-only guidance, no Supercell affiliation, and no bypass/unblocked help.",
-      "acceptanceCriteria": [
-        "The Fred page includes a clearly visible disclaimer section in English.",
-        "The disclaimer aligns with the site’s existing stance (no hosting/embedding/bypass) and avoids implying the chat can access restricted content or provide circumvention instructions.",
-        "The disclaimer does not block normal chat usage (it is informative, not a modal that must be dismissed)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/FredChatPage.tsx",
-          "operation": "modify",
-          "description": "Add a clearly visible, non-blocking disclaimer section on the page stating: Fred is an offline helper with limited knowledge; guidance is informational only; not affiliated with Supercell; and the site does not provide \"unblocked\" gameplay or bypass methods. Use shadcn-ui components (e.g., Card/Alert styles if available) for consistent presentation; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/content/disclaimer.ts",
-          "operation": "modify",
-          "description": "Add or reuse centralized disclaimer constants specific to the Fred page (offline helper, limited knowledge, informational-only, not affiliated) while keeping existing \"no unblocked/bypass\" stance consistent for reuse across the UI."
+          "description": "Integrate session-based persistence for the intro dismissal (via the new hook) so the intro is shown only until dismissed in the current session. Add a small \"About Fred\" / \"Show intro\" action in the Ask Fred UI (e.g., in the chat header area) that reopens the intro without disrupting normal chat usage; use existing shadcn-ui Button styling patterns; verify the component's usage instructions before implementing."
         }
       ]
     }
