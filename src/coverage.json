@@ -1,24 +1,77 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T16:03:52.777Z",
+  "generatedAt": "2026-02-06T17:01:57.124Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 1,
+    "total": 4,
+    "implemented": 4,
     "items": [
       {
-        "id": "REQ-25",
-        "summary": "Update the top-left header brand link/label (the button that navigates to Home) to display exactly \"ClashRoyalHub\".",
+        "id": "REQ-34",
+        "summary": "Expand Fred’s offline Clash Royale knowledge base significantly beyond the current topics so he can answer a much broader range of Clash Royale questions (while remaining fully deterministic and fully local with zero network calls). Add substantial new topic coverage (with keywords + synonyms + answers) for common cards, archetypes, matchups, ladder fundamentals, progression terms, and practical decision-making scenarios, so users experience a clear capability jump compared to the current limited deck answers.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/SiteLayout.tsx"
+          "frontend/src/utils/fredKnowledgeTopics.ts",
+          "frontend/src/utils/fredKnowledgeCards.ts",
+          "frontend/src/utils/fredKnowledgeMatchups.ts",
+          "frontend/src/utils/fredKnowledgeLadderAndProgression.ts"
         ],
         "matchedFiles": [
-          "frontend/src/components/SiteLayout.tsx"
+          "frontend/src/utils/fredKnowledgeTopics.ts",
+          "frontend/src/utils/fredKnowledgeCards.ts",
+          "frontend/src/utils/fredKnowledgeMatchups.ts",
+          "frontend/src/utils/fredKnowledgeLadderAndProgression.ts"
+        ]
+      },
+      {
+        "id": "REQ-35",
+        "summary": "Improve Fred’s ability to answer deck-related questions by adding deterministic deck-question handling that can recognize when a user provides a deck list (8 cards or near-8 cards) or asks for deck feedback, and return a structured response (identified win condition(s), likely archetype, strengths, weaknesses, and concrete improvement suggestions) based on a local, static set of rules and card-role mappings.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/fredDeckCardRoles.ts",
+          "frontend/src/utils/fredDeckParser.ts",
+          "frontend/src/utils/fredDeckReview.ts",
+          "frontend/src/utils/fredKnowledgeBase.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/fredDeckCardRoles.ts",
+          "frontend/src/utils/fredDeckParser.ts",
+          "frontend/src/utils/fredDeckReview.ts",
+          "frontend/src/utils/fredKnowledgeBase.ts"
+        ]
+      },
+      {
+        "id": "REQ-36",
+        "summary": "Enhance Fred’s deterministic matching so common deck/card phrasing is routed to the right answers more reliably, including handling card-name variations, punctuation, pluralization, and common shorthand (e.g., “xbow” vs “x-bow”, “gy” vs “graveyard”), while preserving deterministic behavior.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/fredMatcher.ts",
+          "frontend/src/utils/fredDeckParser.ts",
+          "frontend/src/utils/fredKnowledgeTopics.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/fredMatcher.ts",
+          "frontend/src/utils/fredDeckParser.ts",
+          "frontend/src/utils/fredKnowledgeTopics.ts"
+        ]
+      },
+      {
+        "id": "REQ-37",
+        "summary": "Update the Ask Fred UI helper text (welcome intro and in-chat helper text) and the Fred disclaimer copy (where currently shown) so the app clearly communicates the upgraded coverage while still being accurate: Fred remains an offline, deterministic helper (not ChatGPT), may not know everything, and will ask clarifying questions when needed.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/FredWelcomeIntro.tsx",
+          "frontend/src/pages/FredChatPage.tsx",
+          "frontend/src/content/disclaimer.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/FredWelcomeIntro.tsx",
+          "frontend/src/pages/FredChatPage.tsx",
+          "frontend/src/content/disclaimer.ts"
         ]
       }
     ]
@@ -28,7 +81,18 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/SiteLayout.tsx",
+    "frontend/src/components/FredWelcomeIntro.tsx",
+    "frontend/src/content/disclaimer.ts",
+    "frontend/src/pages/FredChatPage.tsx",
+    "frontend/src/utils/fredDeckCardRoles.ts",
+    "frontend/src/utils/fredDeckParser.ts",
+    "frontend/src/utils/fredDeckReview.ts",
+    "frontend/src/utils/fredKnowledgeBase.ts",
+    "frontend/src/utils/fredKnowledgeCards.ts",
+    "frontend/src/utils/fredKnowledgeLadderAndProgression.ts",
+    "frontend/src/utils/fredKnowledgeMatchups.ts",
+    "frontend/src/utils/fredKnowledgeTopics.ts",
+    "frontend/src/utils/fredMatcher.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

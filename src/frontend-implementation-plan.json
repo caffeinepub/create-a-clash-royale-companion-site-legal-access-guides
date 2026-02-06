@@ -1,21 +1,121 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Update header brand label to ClashRoyalHub",
+  "title": "Offline Fred upgrade: expanded Clash Royale coverage, deterministic deck reviews, and improved matching",
   "requirements": [
     {
-      "id": "REQ-25",
-      "summary": "Change the global header brand link/label text to exactly \"ClashRoyalHub\" while keeping Home navigation behavior unchanged.",
+      "id": "REQ-34",
+      "summary": "Significantly expand Fred’s static offline Clash Royale knowledge topics (keywords/synonyms/answers) across cards, archetypes, matchups, ladder fundamentals, progression terms, and decision-making scenarios.",
       "acceptanceCriteria": [
-        "In the global header, the brand label text renders as exactly \"ClashRoyalHub\" (matching capitalization and spelling).",
-        "Clicking the brand label still navigates to the Home page.",
-        "No other navigation labels (Home, Beginner Guide, Deck Tips, Discussions, Ask Fred, About, Admin) are changed."
+        "Fred continues to generate answers locally using the existing deterministic knowledge-base approach (no external APIs, no LLM calls).",
+        "The topic dataset (e.g., in the existing static topics module) is expanded with a clearly larger set of topic entries than the current baseline, including at minimum: (a) more deck-building guidance (roles, spell packages, defensive cores), (b) matchup/general counterplay advice for common win conditions, and (c) card-specific guidance for a meaningful set of commonly referenced cards.",
+        "Asking varied Clash Royale questions (mechanics, archetypes, counters, deck-building, general strategy) yields relevant answers more often than the current baseline, with fewer fallbacks for common questions.",
+        "All new user-facing topic content is in English."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/SiteLayout.tsx",
+          "path": "frontend/src/utils/fredKnowledgeTopics.ts",
           "operation": "modify",
-          "description": "Update the header brand button label text from \"ClashRoyaleHub\" to exactly \"ClashRoyalHub\" without altering the onClick handler that navigates to the Home page, and without changing any other nav item labels."
+          "description": "Expand the static topic dataset substantially by adding many new TopicDefinition entries and categories (e.g., cards, matchups, ladder fundamentals, progression, decision-making scenarios), ensuring each has robust keywords + synonyms + deterministic English answers."
+        },
+        {
+          "path": "frontend/src/utils/fredKnowledgeCards.ts",
+          "operation": "create",
+          "description": "Create a dedicated static, English-only card guidance module (commonly referenced cards and win conditions) exporting topic-ready definitions (keywords/synonyms/answers) that are merged into Fred’s allTopics list."
+        },
+        {
+          "path": "frontend/src/utils/fredKnowledgeMatchups.ts",
+          "operation": "create",
+          "description": "Create a static matchup/counterplay module covering common win conditions and archetype-vs-archetype advice (deterministic guidance, no tier-list claims), exported as topic-ready definitions to be included in allTopics."
+        },
+        {
+          "path": "frontend/src/utils/fredKnowledgeLadderAndProgression.ts",
+          "operation": "create",
+          "description": "Create a static module for ladder fundamentals and progression terminology (levels, upgrades, gold/gems, wild cards, masteries, trophy road/path of legends basics) as topic-ready definitions to reduce fallbacks for common non-deck questions."
+        }
+      ]
+    },
+    {
+      "id": "REQ-35",
+      "summary": "Add deterministic deck-list detection and a structured, rule-based deck review response (win condition(s), archetype guess, strengths/weaknesses, actionable suggestions) using local card-role mappings.",
+      "acceptanceCriteria": [
+        "When the user message contains a recognizable deck list (e.g., multiple card names separated by commas/new lines), Fred produces a deck review response rather than falling back to generic topic text.",
+        "Deck review responses are deterministic and include at least: detected win condition(s), inferred archetype (or best guess), at least 2 strengths, at least 2 weaknesses, and at least 2 actionable suggestions (e.g., add a small spell, add a building, improve air defense) based only on local rules.",
+        "If the deck list is incomplete/ambiguous, Fred asks a clarifying question (e.g., “Can you list all 8 cards?”) instead of returning an unrelated answer.",
+        "No network calls are introduced; all logic runs client-side."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/fredDeckCardRoles.ts",
+          "operation": "create",
+          "description": "Create a static, deterministic mapping of Clash Royale cards to roles/tags (win condition, mini tank, tank, ranged support, splash, swarm, building, small spell, big spell, reset, air-targeting, etc.) plus any rule constants needed for consistent deck evaluation."
+        },
+        {
+          "path": "frontend/src/utils/fredDeckParser.ts",
+          "operation": "create",
+          "description": "Implement deterministic parsing utilities that extract and canonicalize card names from a user message (commas/newlines/bullets), detect near-8-card lists, and return parse diagnostics to support clarifying questions when incomplete/ambiguous."
+        },
+        {
+          "path": "frontend/src/utils/fredDeckReview.ts",
+          "operation": "create",
+          "description": "Implement deterministic deck review generation that consumes parsed cards + role mappings and outputs a structured English response including: win condition(s), archetype best-guess, strengths, weaknesses, and actionable improvement suggestions (rule-based only)."
+        },
+        {
+          "path": "frontend/src/utils/fredKnowledgeBase.ts",
+          "operation": "modify",
+          "description": "Add deterministic routing to detect deck-list/deck-feedback queries before topic matching; when detected, return the structured deck review (or a clarifying question) instead of generic topic answers, while preserving existing safety checks and offline behavior."
+        }
+      ]
+    },
+    {
+      "id": "REQ-36",
+      "summary": "Improve deterministic matching robustness for common card/archetype phrasing, shorthand, punctuation, pluralization, and common variations without introducing nondeterminism.",
+      "acceptanceCriteria": [
+        "Common shorthand and minor misspellings/formatting differences for popular archetypes and win conditions (e.g., xbow/X-Bow, gy/Graveyard, bridgespam/bridge spam) match the intended topics more consistently than before.",
+        "Deck/card-oriented questions are less likely to hit the generic fallback when the relevant content exists in the knowledge base.",
+        "All matching remains deterministic (no randomness, no nondeterministic ranking)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/fredMatcher.ts",
+          "operation": "modify",
+          "description": "Enhance deterministic normalization and synonym expansion to better handle punctuation variants and shorthand (e.g., x-bow/xbow, gy/graveyard, bridgespam/bridge spam), add a curated alias/typo map for high-frequency terms, and keep scoring deterministic and stable."
+        },
+        {
+          "path": "frontend/src/utils/fredDeckParser.ts",
+          "operation": "modify",
+          "description": "Align deck parsing canonicalization with the improved matcher normalization so that card-name variations and shorthand resolve consistently for deck detection and deck review."
+        },
+        {
+          "path": "frontend/src/utils/fredKnowledgeTopics.ts",
+          "operation": "modify",
+          "description": "Augment keywords/synonyms across existing and newly added topics to include common phrasing variants and shorthand (e.g., ‘xbow’, ‘x bow’, ‘x-bow’; ‘gy’; ‘bridgespam’), improving match hit-rate without changing determinism."
+        }
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "summary": "Update Ask Fred UI helper text and disclaimer copy to reflect expanded coverage and improved deck help while remaining accurate about being offline and deterministic.",
+      "acceptanceCriteria": [
+        "The Ask Fred welcome/intro screen text and the in-chat helper text are updated to reflect expanded coverage (including improved deck help) without claiming ChatGPT-like/open-ended internet knowledge.",
+        "The disclaimer messaging remains consistent with the existing safety stance (offline, informational only, not affiliated with Supercell, no bypass/unblocked help).",
+        "All updated user-facing text is in English and is consistent across the Ask Fred page (intro, header helper text, and chat footer/helper line)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/FredWelcomeIntro.tsx",
+          "operation": "modify",
+          "description": "Update the welcome/intro copy to highlight expanded offline coverage and deterministic deck reviews (including clarifying questions for incomplete decks), avoiding any claims of being ChatGPT or having internet access."
+        },
+        {
+          "path": "frontend/src/pages/FredChatPage.tsx",
+          "operation": "modify",
+          "description": "Update the Ask Fred header helper text, the initial Fred greeting message, and the in-chat footer/helper line to consistently communicate the upgraded offline coverage and deterministic deck help (including clarifying prompts) while staying accurate and safety-aligned."
+        },
+        {
+          "path": "frontend/src/content/disclaimer.ts",
+          "operation": "modify",
+          "description": "Refine FRED_DISCLAIMER wording to remain consistent with the app’s safety stance (offline, informational, not affiliated with Supercell, no bypass/unblocked help) while accurately reflecting expanded coverage and deck-review capability."
         }
       ]
     }

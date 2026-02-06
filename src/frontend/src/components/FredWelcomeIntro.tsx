@@ -1,74 +1,85 @@
-import { Sparkles, Zap, Target, Layers, Wand2, Swords, Lightbulb, Shield } from 'lucide-react';
+import { MessageSquare, Zap, Swords, Users, Target, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface FredWelcomeIntroProps {
   onStartChat: () => void;
 }
 
 export default function FredWelcomeIntro({ onStartChat }: FredWelcomeIntroProps) {
-  const exampleTopics = [
-    { icon: Zap, label: 'Game Mechanics', description: 'Elixir, tower targeting, card roles & damage types' },
-    { icon: Layers, label: 'Deck Archetypes', description: 'Beatdown, cycle, control, siege, bait, bridge spam & more' },
-    { icon: Swords, label: 'Battle Interactions', description: 'Kiting, spell timing, punishing & King activation' },
-    { icon: Shield, label: 'Deck Building', description: 'Win conditions, spells, air defense & balance' },
-    { icon: Target, label: 'Strategy Tips', description: 'Elixir advantage, starting hands & defending threats' },
-    { icon: Lightbulb, label: 'Advanced Tactics', description: 'Split lane pressure, spell packages & more' },
+  const topics = [
+    {
+      icon: Zap,
+      title: 'Game Mechanics',
+      description: 'Elixir management, tower targeting, card roles, and damage types',
+    },
+    {
+      icon: Users,
+      title: 'Deck Archetypes',
+      description: 'Cycle, beatdown, control, siege, bait, bridge spam, and more',
+    },
+    {
+      icon: Swords,
+      title: 'Battle Interactions',
+      description: 'Kiting, spell timing, punishing, and King Tower activation',
+    },
+    {
+      icon: Target,
+      title: 'Deck Building & Reviews',
+      description: 'Win conditions, spell packages, balance—plus full deck analysis!',
+    },
+    {
+      icon: TrendingUp,
+      title: 'Strategy & Matchups',
+      description: 'Elixir advantage, countering decks, ladder tips, and progression',
+    },
+    {
+      icon: MessageSquare,
+      title: 'Card Guidance',
+      description: 'Detailed info on Hog Rider, Giant, Balloon, X-Bow, and many more',
+    },
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="text-center space-y-4">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-2">
-          <Sparkles className="w-10 h-10 text-primary" />
-        </div>
-        <div>
-          <h2 className="text-3xl font-bold mb-2">Meet Fred</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Your friendly Clash Royale strategy helper. Fred can answer questions about game mechanics, 
-            deck building, battle tactics, and advanced strategies to help you improve your gameplay.
-          </p>
-        </div>
+    <div className="mx-auto max-w-4xl space-y-8 p-6">
+      <div className="space-y-4 text-center">
+        <h1 className="text-4xl font-bold tracking-tight">
+          Welcome to Ask Fred!
+        </h1>
+        <p className="text-lg text-muted-foreground">
+          Your offline Clash Royale strategy assistant. Fred has expanded knowledge covering mechanics, archetypes, 
+          interactions, deck building, strategy, card guidance, matchups, and progression—all generated locally 
+          without any external AI or internet connection.
+        </p>
+        <p className="text-base text-muted-foreground">
+          <strong>New:</strong> Fred can now review your deck! Just list all 8 cards and get detailed analysis 
+          with strengths, weaknesses, and actionable suggestions.
+        </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-xl">What can Fred help you with?</CardTitle>
-          <CardDescription>
-            Ask Fred about any of these Clash Royale topics
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {exampleTopics.map((topic) => (
-              <div
-                key={topic.label}
-                className="flex items-start gap-3 p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
-              >
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <topic.icon className="w-5 h-5 text-primary" />
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {topics.map((topic) => {
+          const Icon = topic.icon;
+          return (
+            <Card key={topic.title} className="transition-colors hover:bg-accent">
+              <CardContent className="flex flex-col items-center space-y-3 p-6 text-center">
+                <div className="rounded-full bg-primary/10 p-3">
+                  <Icon className="h-6 w-6 text-primary" />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm mb-1">{topic.label}</h3>
-                  <p className="text-xs text-muted-foreground">{topic.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+                <h3 className="font-semibold">{topic.title}</h3>
+                <p className="text-sm text-muted-foreground">
+                  {topic.description}
+                </p>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
 
-      <div className="text-center space-y-4">
-        <Button
-          onClick={onStartChat}
-          size="lg"
-          className="px-8 py-6 text-lg font-semibold"
-        >
+      <div className="flex justify-center pt-4">
+        <Button onClick={onStartChat} size="lg" className="px-8">
           Start Chatting with Fred
         </Button>
-        <p className="text-sm text-muted-foreground">
-          Fred provides offline, informational guidance based on Clash Royale fundamentals
-        </p>
       </div>
     </div>
   );

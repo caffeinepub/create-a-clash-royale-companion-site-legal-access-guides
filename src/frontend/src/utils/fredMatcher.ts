@@ -8,7 +8,7 @@ interface MatchResult {
 
 // Normalize text for matching
 export function normalizeText(text: string): string {
-  return text.toLowerCase().trim().replace(/[^\w\s]/g, ' ').replace(/\s+/g, ' ');
+  return text.toLowerCase().trim().replace(/[^\w\s-]/g, ' ').replace(/\s+/g, ' ');
 }
 
 // Tokenize text into words
@@ -16,24 +16,54 @@ export function tokenize(text: string): string[] {
   return normalizeText(text).split(' ').filter(word => word.length > 0);
 }
 
-// Common word expansions and synonyms
+// Expanded synonym map with common variations
 const synonymMap: Record<string, string[]> = {
-  'defend': ['defense', 'counter', 'stop', 'beat'],
-  'attack': ['offense', 'push', 'pressure'],
-  'best': ['good', 'top', 'great', 'optimal'],
-  'how': ['what', 'when', 'why'],
-  'deck': ['decks', 'composition'],
+  'defend': ['defense', 'counter', 'stop', 'beat', 'against', 'vs'],
+  'attack': ['offense', 'push', 'pressure', 'offensive'],
+  'best': ['good', 'top', 'great', 'optimal', 'strong'],
+  'how': ['what', 'when', 'why', 'where'],
+  'deck': ['decks', 'composition', 'lineup'],
   'card': ['cards', 'troop', 'troops', 'unit', 'units'],
-  'win': ['winning', 'victory'],
-  'lose': ['losing', 'loss'],
+  'win': ['winning', 'victory', 'beat'],
+  'lose': ['losing', 'loss', 'defeat'],
   'tower': ['towers', 'princess tower', 'king tower'],
   'spell': ['spells'],
   'building': ['buildings', 'structure', 'structures'],
+  'use': ['using', 'play', 'playing', 'run', 'running'],
+  'help': ['tips', 'advice', 'guide', 'strategy'],
+  'review': ['rate', 'check', 'analyze', 'feedback'],
+};
+
+// Common shorthand and typo corrections
+const aliasMap: Record<string, string> = {
+  'xbow': 'x-bow',
+  'x bow': 'x-bow',
+  'gy': 'graveyard',
+  'mk': 'mega knight',
+  'rg': 'royal giant',
+  'eg': 'electro giant',
+  'lava': 'lava hound',
+  'loon': 'balloon',
+  'hog': 'hog rider',
+  'bridgespam': 'bridge spam',
+  'logbait': 'log bait',
+  'beatdown': 'beatdown',
+  'wincon': 'win condition',
+  'wincondition': 'win condition',
+  'elixir': 'elixir',
+  'elix': 'elixir',
 };
 
 // Expand a word with its synonyms
 function expandWord(word: string): string[] {
   const normalized = word.toLowerCase();
+  
+  // Check for alias first
+  const alias = aliasMap[normalized];
+  if (alias) {
+    return [alias, normalized];
+  }
+  
   const expansions = [normalized];
   
   if (synonymMap[normalized]) {
@@ -63,8 +93,11 @@ export function calculateMatchScore(
   for (const keyword of keywords) {
     const keywordTokens = tokenize(keyword);
     for (const keywordToken of keywordTokens) {
-      if (expandedInput.includes(keywordToken)) {
-        score += 3;
+      const expandedKeyword = expandWord(keywordToken);
+      for (const exp of expandedKeyword) {
+        if (expandedInput.includes(exp)) {
+          score += 3;
+        }
       }
     }
   }
@@ -73,8 +106,11 @@ export function calculateMatchScore(
   for (const synonym of synonyms) {
     const synonymTokens = tokenize(synonym);
     for (const synonymToken of synonymTokens) {
-      if (expandedInput.includes(synonymToken)) {
-        score += 2;
+      const expandedSynonym = expandWord(synonymToken);
+      for (const exp of expandedSynonym) {
+        if (expandedInput.includes(exp)) {
+          score += 2;
+        }
       }
     }
   }
@@ -82,13 +118,15 @@ export function calculateMatchScore(
   // Bonus for multi-word phrase matches
   const inputText = expandedInput.join(' ');
   for (const keyword of keywords) {
-    if (inputText.includes(normalizeText(keyword))) {
+    const normalizedKeyword = normalizeText(keyword);
+    if (inputText.includes(normalizedKeyword)) {
       score += 5;
     }
   }
   
   for (const synonym of synonyms) {
-    if (inputText.includes(normalizeText(synonym))) {
+    const normalizedSynonym = normalizeText(synonym);
+    if (inputText.includes(normalizedSynonym)) {
       score += 3;
     }
   }

@@ -1,47 +1,96 @@
 {
   "kind": "build_request",
-  "title": "Update header brand link text to ClashRoyalHub",
+  "title": "Major offline upgrade to Fred for better deck and Clash Royale Q&A coverage",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-25",
-      "text": "Update the top-left header brand link/label (the button that navigates to Home) to display exactly \"ClashRoyalHub\".",
+      "id": "REQ-34",
+      "text": "Expand Fred’s offline Clash Royale knowledge base significantly beyond the current topics so he can answer a much broader range of Clash Royale questions (while remaining fully deterministic and fully local with zero network calls). Add substantial new topic coverage (with keywords + synonyms + answers) for common cards, archetypes, matchups, ladder fundamentals, progression terms, and practical decision-making scenarios, so users experience a clear capability jump compared to the current limited deck answers.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "recent-messages-5"
         ],
         "quotes": [
-          "Take that link at the top and change it to ClashRoyalHub"
+          "I want an all new update for Fred i want like a Fred 100 I want him to have the same abilities as ChatGPT and be able to answer any clash question because right now he can barely answer simple questions about a deck I want him upgraded like 1 million lines of code"
         ]
       },
       "acceptanceCriteria": [
-        "In the global header, the brand label text renders as exactly \"ClashRoyalHub\" (matching capitalization and spelling).",
-        "Clicking the brand label still navigates to the Home page.",
-        "No other navigation labels (Home, Beginner Guide, Deck Tips, Discussions, Ask Fred, About, Admin) are changed."
+        "Fred continues to generate answers locally using the existing deterministic knowledge-base approach (no external APIs, no LLM calls).",
+        "The topic dataset (e.g., in the existing static topics module) is expanded with a clearly larger set of topic entries than the current baseline, including at minimum: (a) more deck-building guidance (roles, spell packages, defensive cores), (b) matchup/general counterplay advice for common win conditions, and (c) card-specific guidance for a meaningful set of commonly referenced cards.",
+        "Asking varied Clash Royale questions (mechanics, archetypes, counters, deck-building, general strategy) yields relevant answers more often than the current baseline, with fewer fallbacks for common questions.",
+        "All new user-facing topic content is in English."
+      ]
+    },
+    {
+      "id": "REQ-35",
+      "text": "Improve Fred’s ability to answer deck-related questions by adding deterministic deck-question handling that can recognize when a user provides a deck list (8 cards or near-8 cards) or asks for deck feedback, and return a structured response (identified win condition(s), likely archetype, strengths, weaknesses, and concrete improvement suggestions) based on a local, static set of rules and card-role mappings.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "recent-messages-5"
+        ],
+        "quotes": [
+          "because right now he can barely answer simple questions about a deck"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When the user message contains a recognizable deck list (e.g., multiple card names separated by commas/new lines), Fred produces a deck review response rather than falling back to generic topic text.",
+        "Deck review responses are deterministic and include at least: detected win condition(s), inferred archetype (or best guess), at least 2 strengths, at least 2 weaknesses, and at least 2 actionable suggestions (e.g., add a small spell, add a building, improve air defense) based only on local rules.",
+        "If the deck list is incomplete/ambiguous, Fred asks a clarifying question (e.g., “Can you list all 8 cards?”) instead of returning an unrelated answer.",
+        "No network calls are introduced; all logic runs client-side."
+      ]
+    },
+    {
+      "id": "REQ-36",
+      "text": "Enhance Fred’s deterministic matching so common deck/card phrasing is routed to the right answers more reliably, including handling card-name variations, punctuation, pluralization, and common shorthand (e.g., “xbow” vs “x-bow”, “gy” vs “graveyard”), while preserving deterministic behavior.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "recent-messages-5"
+        ],
+        "quotes": [
+          "be able to answer any clash question"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Common shorthand and minor misspellings/formatting differences for popular archetypes and win conditions (e.g., xbow/X-Bow, gy/Graveyard, bridgespam/bridge spam) match the intended topics more consistently than before.",
+        "Deck/card-oriented questions are less likely to hit the generic fallback when the relevant content exists in the knowledge base.",
+        "All matching remains deterministic (no randomness, no nondeterministic ranking)."
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "text": "Update the Ask Fred UI helper text (welcome intro and in-chat helper text) and the Fred disclaimer copy (where currently shown) so the app clearly communicates the upgraded coverage while still being accurate: Fred remains an offline, deterministic helper (not ChatGPT), may not know everything, and will ask clarifying questions when needed.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "recent-messages-5"
+        ],
+        "quotes": [
+          "I want him to have the same abilities as ChatGPT"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The Ask Fred welcome/intro screen text and the in-chat helper text are updated to reflect expanded coverage (including improved deck help) without claiming ChatGPT-like/open-ended internet knowledge.",
+        "The disclaimer messaging remains consistent with the existing safety stance (offline, informational only, not affiliated with Supercell, no bypass/unblocked help).",
+        "All updated user-facing text is in English and is consistent across the Ask Fred page (intro, header helper text, and chat footer/helper line)."
       ]
     }
   ],
   "constraints": [
-    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
-    "Keep all user-facing text in English."
+    "Do not add any external AI/LLM integrations or any network calls for Fred; responses must remain fully local and deterministic.",
+    "Do not implement, host, embed, proxy, or provide any mechanism to bypass network restrictions/paywalls/access controls (including \"unblocked\" gameplay guidance).",
+    "Do not modify any files under frontend/src/components/ui (read-only).",
+    "Keep changes within the existing single-actor backend architecture; no backend changes are required for this request."
   ],
   "nonGoals": [
-    "Do not change the HTML document title or other site branding text unless explicitly requested.",
-    "Do not modify routing behavior beyond ensuring the brand label still navigates to Home."
+    "Making Fred equivalent to ChatGPT in the general sense (open-domain knowledge, internet browsing, or non-deterministic generation).",
+    "Adding real-time chat, WebSockets, or external data sources for Fred.",
+    "Storing chat history on the backend or adding user accounts specifically for chat memory."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

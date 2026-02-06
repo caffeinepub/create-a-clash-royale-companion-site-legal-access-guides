@@ -1,7 +1,7 @@
-export const DISCLAIMER_TEXT = `This site provides informational content and links to official sources only. We do not host, embed, or provide any means to bypass restrictions or access controls for Clash Royale.`;
+// Centralized disclaimer text constants
 
-export const LEGAL_NOTICE = `This website is not affiliated with, endorsed by, or connected to Supercell. Clash Royale and all related marks, logos, and images are trademarks of Supercell.`;
+export const SITE_DISCLAIMER = `This fan-made site is not affiliated with, endorsed by, or connected to Supercell. Clash Royale and all related marks are trademarks of Supercell. All game content, images, and information are property of Supercell.`;
 
-export const NO_UNBLOCK_NOTICE = `We do NOT provide "unblocked" gameplay, VPN services, proxy instructions, or any circumvention tools. All links point exclusively to official Supercell sources.`;
+export const FRED_DISCLAIMER = `Fred is an offline, deterministic helper with expanded knowledge about Clash Royale strategy, mechanics, archetypes, deck building, matchups, and progression. All responses are generated locally on your device. Fred provides informational guidance only and cannot help with bypassing restrictions or accessing blocked content. For official game information, visit supercell.com/en/games/clashroyale/`;
 
-export const FRED_DISCLAIMER = `Fred is an offline helper with expanded knowledge about Clash Royale mechanics, archetypes, interactions, deck building, and strategy. All responses are informational only and generated locally without AI services. This site is not affiliated with Supercell and does not provide "unblocked" gameplay or methods to bypass restrictions. For comprehensive information, visit the official Clash Royale website.`;
+export const ABOUT_DISCLAIMER = `ClashRoyalHub is an independent fan site created to help players improve at Clash Royale. We are not affiliated with Supercell. All game content and trademarks belong to Supercell.`;

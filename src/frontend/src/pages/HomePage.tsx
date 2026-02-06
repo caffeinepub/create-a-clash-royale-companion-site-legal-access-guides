@@ -1,8 +1,12 @@
-import { ExternalLink, BookOpen, Swords, Trophy } from 'lucide-react';
+import { ExternalLink, BookOpen, Swords, Trophy, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-export default function HomePage() {
+interface HomePageProps {
+  onNavigateToAbout?: (sectionId: string) => void;
+}
+
+export default function HomePage({ onNavigateToAbout }: HomePageProps) {
   return (
     <div className="w-full">
       {/* Hero Section */}
@@ -18,12 +22,23 @@ export default function HomePage() {
                 dominating the arena. Access official resources and expert guides all in one place.
               </p>
 
-              <div className="bg-muted/50 border border-border/60 rounded-lg p-4 space-y-2">
+              <div className="bg-muted/50 border border-border/60 rounded-lg p-4 space-y-3">
                 <p className="text-sm font-medium">⚠️ Important Notice</p>
                 <p className="text-sm text-muted-foreground">
                   This site provides informational content and links to official sources only. We do
                   not host the game, provide "unblocked" access, or any means to bypass restrictions.
                 </p>
+                {onNavigateToAbout && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-auto p-0 text-sm font-medium text-primary hover:text-primary/80 hover:bg-transparent"
+                    onClick={() => onNavigateToAbout('site-address-section')}
+                  >
+                    <Info className="h-3.5 w-3.5 mr-1.5" />
+                    Why does the browser URL still show the deployment address?
+                  </Button>
+                )}
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">

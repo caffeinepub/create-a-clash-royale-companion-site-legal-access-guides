@@ -2,10 +2,13 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-top-left-header-brand-link-label-the-button-that-navigates-to-home-to-display-exactly-clashroyalhub",
-      "featureTitle": "Update the top-left header brand link/label (the button that navigates to Home) to display exactly \"ClashRoyalHub\".",
+      "featureId": "feature-expand-fred-s-offline-clash-royale-knowledge-base-significantly-beyond-the-current-topics-so-he-can-answer-a-much-broader-range-of-clash-royale-questions-while-remaining-fully-deterministic-and-fully-local-with-zero-network-calls-add-substantial-new-topic-coverage-with-keywords-synonyms-answers-for-common-cards-archetypes-matchups-ladder-fundamentals-progression-terms-and-practical-decision-making-scenarios-so-users-experience-a-clear-capability-jump-compared-to-the-current-limited-deck-answers",
+      "featureTitle": "Expand Fred’s offline Clash Royale knowledge base significantly beyond the current topics so he can answer a much broader range of Clash Royale questions (while remaining fully deterministic and fully local with zero network calls). Add substantial new topic coverage (with keywords + synonyms + answers) for common cards, archetypes, matchups, ladder fundamentals, progression terms, and practical decision-making scenarios, so users experience a clear capability jump compared to the current limited deck answers.",
       "files": [
-        "frontend/src/components/SiteLayout.tsx"
+        "frontend/src/utils/fredKnowledgeCards.ts",
+        "frontend/src/utils/fredKnowledgeLadderAndProgression.ts",
+        "frontend/src/utils/fredKnowledgeMatchups.ts",
+        "frontend/src/utils/fredKnowledgeTopics.ts"
       ],
       "components": [
         "authorization@4.0.0",
@@ -16,7 +19,71 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-25"
+        "REQ-34"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-improve-fred-s-ability-to-answer-deck-related-questions-by-adding-deterministic-deck-question-handling-that-can-recognize-when-a-user-provides-a-deck-list-8-cards-or-near-8-cards-or-asks-for-deck-feedback-and-return-a-structured-response-identified-win-condition-s-likely-archetype-strengths-weaknesses-and-concrete-improvement-suggestions-based-on-a-local-static-set-of-rules-and-card-role-mappings",
+      "featureTitle": "Improve Fred’s ability to answer deck-related questions by adding deterministic deck-question handling that can recognize when a user provides a deck list (8 cards or near-8 cards) or asks for deck feedback, and return a structured response (identified win condition(s), likely archetype, strengths, weaknesses, and concrete improvement suggestions) based on a local, static set of rules and card-role mappings.",
+      "files": [
+        "frontend/src/utils/fredDeckCardRoles.ts",
+        "frontend/src/utils/fredDeckParser.ts",
+        "frontend/src/utils/fredDeckReview.ts",
+        "frontend/src/utils/fredKnowledgeBase.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-35"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-enhance-fred-s-deterministic-matching-so-common-deck-card-phrasing-is-routed-to-the-right-answers-more-reliably-including-handling-card-name-variations-punctuation-pluralization-and-common-shorthand-e-g-xbow-vs-x-bow-gy-vs-graveyard-while-preserving-deterministic-behavior",
+      "featureTitle": "Enhance Fred’s deterministic matching so common deck/card phrasing is routed to the right answers more reliably, including handling card-name variations, punctuation, pluralization, and common shorthand (e.g., “xbow” vs “x-bow”, “gy” vs “graveyard”), while preserving deterministic behavior.",
+      "files": [
+        "frontend/src/utils/fredDeckParser.ts",
+        "frontend/src/utils/fredKnowledgeTopics.ts",
+        "frontend/src/utils/fredMatcher.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-36"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-ask-fred-ui-helper-text-welcome-intro-and-in-chat-helper-text-and-the-fred-disclaimer-copy-where-currently-shown-so-the-app-clearly-communicates-the-upgraded-coverage-while-still-being-accurate-fred-remains-an-offline-deterministic-helper-not-chatgpt-may-not-know-everything-and-will-ask-clarifying-questions-when-needed",
+      "featureTitle": "Update the Ask Fred UI helper text (welcome intro and in-chat helper text) and the Fred disclaimer copy (where currently shown) so the app clearly communicates the upgraded coverage while still being accurate: Fred remains an offline, deterministic helper (not ChatGPT), may not know everything, and will ask clarifying questions when needed.",
+      "files": [
+        "frontend/src/components/FredWelcomeIntro.tsx",
+        "frontend/src/content/disclaimer.ts",
+        "frontend/src/pages/FredChatPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-37"
       ],
       "confidence": "high"
     }

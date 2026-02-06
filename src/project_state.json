@@ -1,12 +1,19 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 19,
+  "projectStateVersion": 29,
   "summary": "Build a website that provides access to \"Clash Royale unblocked\" for the user.",
-  "architectural_notes": [],
-  "known_issues": [
-    "Branding rename to \"ClashRoyaleHub\" did not update the link name/label; link still shows the old name after Version 7 launch."
+  "architectural_notes": [
+    "User requests changing the site URL (address/domain/canonical URL) to \"ClashRoyaleHub\", which is distinct from updating visible branding labels/titles.",
+    "User requests a major Fred upgrade to ChatGPT-like abilities; this may conflict with the existing requirement that Fred be fully local/offline, deterministic, and have no network calls."
   ],
-  "isFixRequest": true,
+  "known_issues": [
+    "Branding rename to \"ClashRoyaleHub\" did not update the link name/label; link still shows the old name after Version 7 launch.",
+    "Top-of-page/header link/brand text still shows \"Clashroyalegooner\"; user wants it changed to \"CLASHROYALEHUB\".",
+    "After Version 10 deployment, the header/home link label still did not change on the live site; user requests changing the link name to \"ClashRoyalHub\".",
+    "After Version 12 release, the site URL/address/canonical/public URL still appears as \"Clashroyalegooner\"; user reports it did not change to the requested \"ClashRoyaleHub\".",
+    "Fred currently cannot reliably answer even simple deck questions; user reports his current ability is too limited."
+  ],
+  "isFixRequest": false,
   "existing_features": [
     {
       "id": "feature-do-not-implement-host-embed-proxy-or-provide-any-mechanism-to-bypass-network-restrictions-paywalls-or-access-controls-unblocked-gameplay-for-clash-royale-instead-present-a-clear-message-that-the-site-only-provides-legal-official-access-options-and-informational-content",
@@ -199,6 +206,102 @@
         "REQ-25"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-top-of-page-header-brand-link-label-the-clickable-site-name-that-navigates-to-home-so-it-displays-exactly-clashroyalehub-all-caps-replacing-any-previous-branding-text-such-as-clashroyalegooner-or-other-variants",
+      "title": "Update the top-of-page header brand link/label (the clickable site name that navigates to Home) so it displays exactly \"CLASHROYALEHUB\" (all caps), replacing any previous branding text such as \"Clashroyalegooner\" or other variants.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-html-document-title-browser-tab-title-to-display-exactly-clashroyalehub-all-caps-so-that-the-top-of-page-title-shown-when-the-url-is-shared-indexed-matches-the-requested-branding",
+      "title": "Update the HTML document title (browser tab title) to display exactly \"CLASHROYALEHUB\" (all caps) so that the top-of-page/title shown when the URL is shared/indexed matches the requested branding.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-clickable-header-brand-home-link-label-the-text-inside-the-button-that-navigates-to-the-home-page-to-display-exactly-clashroyalhub-case-sensitive-without-changing-the-site-url-or-any-routing-behavior",
+      "title": "Update the clickable header brand/home link label (the text inside the button that navigates to the Home page) to display exactly \"ClashRoyalHub\" (case-sensitive), without changing the site URL or any routing behavior.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-single-configurable-public-site-url-value-used-for-seo-share-metadata-so-the-app-can-present-its-url-as-clashroyalehub-without-changing-routing-behavior",
+      "title": "Add a single configurable “public site URL” value used for SEO/share metadata, so the app can present its URL as \"ClashRoyaleHub\" without changing routing behavior.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-clear-user-facing-text-explaining-that-the-app-s-actual-address-domain-canister-url-is-determined-by-the-deployment-and-that-changing-it-requires-deployment-domain-configuration-outside-the-app-ui",
+      "title": "Add clear user-facing text explaining that the app’s actual address (domain/canister URL) is determined by the deployment, and that changing it requires deployment/domain configuration outside the app UI.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-public-canonical-url-configuration-so-the-app-no-longer-uses-an-invalid-placeholder-base-url-currently-https-clashroyalehub-when-the-environment-variable-is-not-set-instead-default-canonical-share-metadata-to-the-actual-deployed-host-window-location-host-unless-vite-public-site-url-is-explicitly-provided",
+      "title": "Fix the public/canonical URL configuration so the app no longer uses an invalid placeholder base URL (currently \"https://ClashRoyaleHub\") when the environment variable is not set; instead, default canonical/share metadata to the actual deployed host (window.location.host) unless VITE_PUBLIC_SITE_URL is explicitly provided.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-clear-user-facing-explanation-in-english-that-the-browser-address-url-e-g-clashroyalegooner-rwo-caffeine-xyz-is-determined-by-deployment-domain-configuration-and-cannot-be-changed-from-within-the-app-ui-include-the-currently-detected-browser-address-in-the-message-so-users-can-see-what-they-are-on",
+      "title": "Add a clear, user-facing explanation (in English) that the browser address/URL (e.g., \"clashroyalegooner-rwo.caffeine.xyz\") is determined by deployment/domain configuration and cannot be changed from within the app UI; include the currently detected browser address in the message so users can see what they are on.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-home-page-important-notice-area-or-add-a-nearby-short-note-to-include-a-one-sentence-link-cta-to-the-about-page-section-that-explains-why-the-browser-url-still-shows-clashroyalegooner-and-that-changing-the-domain-requires-deployment-level-configuration",
+      "title": "Update the Home page “Important Notice” area (or add a nearby short note) to include a one-sentence link/CTA to the About page section that explains why the browser URL still shows \"clashroyalegooner\" and that changing the domain requires deployment-level configuration.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-expand-fred-s-offline-clash-royale-knowledge-base-significantly-beyond-the-current-topics-so-he-can-answer-a-much-broader-range-of-clash-royale-questions-while-remaining-fully-deterministic-and-fully-local-with-zero-network-calls-add-substantial-new-topic-coverage-with-keywords-synonyms-answers-for-common-cards-archetypes-matchups-ladder-fundamentals-progression-terms-and-practical-decision-making-scenarios-so-users-experience-a-clear-capability-jump-compared-to-the-current-limited-deck-answers",
+      "title": "Expand Fred’s offline Clash Royale knowledge base significantly beyond the current topics so he can answer a much broader range of Clash Royale questions (while remaining fully deterministic and fully local with zero network calls). Add substantial new topic coverage (with keywords + synonyms + answers) for common cards, archetypes, matchups, ladder fundamentals, progression terms, and practical decision-making scenarios, so users experience a clear capability jump compared to the current limited deck answers.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-improve-fred-s-ability-to-answer-deck-related-questions-by-adding-deterministic-deck-question-handling-that-can-recognize-when-a-user-provides-a-deck-list-8-cards-or-near-8-cards-or-asks-for-deck-feedback-and-return-a-structured-response-identified-win-condition-s-likely-archetype-strengths-weaknesses-and-concrete-improvement-suggestions-based-on-a-local-static-set-of-rules-and-card-role-mappings",
+      "title": "Improve Fred’s ability to answer deck-related questions by adding deterministic deck-question handling that can recognize when a user provides a deck list (8 cards or near-8 cards) or asks for deck feedback, and return a structured response (identified win condition(s), likely archetype, strengths, weaknesses, and concrete improvement suggestions) based on a local, static set of rules and card-role mappings.",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enhance-fred-s-deterministic-matching-so-common-deck-card-phrasing-is-routed-to-the-right-answers-more-reliably-including-handling-card-name-variations-punctuation-pluralization-and-common-shorthand-e-g-xbow-vs-x-bow-gy-vs-graveyard-while-preserving-deterministic-behavior",
+      "title": "Enhance Fred’s deterministic matching so common deck/card phrasing is routed to the right answers more reliably, including handling card-name variations, punctuation, pluralization, and common shorthand (e.g., “xbow” vs “x-bow”, “gy” vs “graveyard”), while preserving deterministic behavior.",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-ask-fred-ui-helper-text-welcome-intro-and-in-chat-helper-text-and-the-fred-disclaimer-copy-where-currently-shown-so-the-app-clearly-communicates-the-upgraded-coverage-while-still-being-accurate-fred-remains-an-offline-deterministic-helper-not-chatgpt-may-not-know-everything-and-will-ask-clarifying-questions-when-needed",
+      "title": "Update the Ask Fred UI helper text (welcome intro and in-chat helper text) and the Fred disclaimer copy (where currently shown) so the app clearly communicates the upgraded coverage while still being accurate: Fred remains an offline, deterministic helper (not ChatGPT), may not know everything, and will ask clarifying questions when needed.",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -263,10 +366,28 @@
       "summary": "Update the top header link/label to display the correct site name branding (user requested changing it to \"ClashRoyalHub\").",
       "reqIds": [],
       "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Change the top-of-page/header link/brand text from \"Clashroyalegooner\" to \"CLASHROYALEHUB\" (as shown in Google/search).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Change the website URL to \"ClashRoyaleHub\" (update the site address/domain or canonical URL, not just the visible branding text).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Upgrade Fred to have ChatGPT-like capabilities (answer any Clash Royale question with much broader coverage than current offline rules-based responses).",
+      "reqIds": [],
+      "status": "pending"
     }
   ],
   "gameProjectType": "none",
-  "projectName": "Clash Royale Hub",
+  "projectName": "CLASHROYALEHUB",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

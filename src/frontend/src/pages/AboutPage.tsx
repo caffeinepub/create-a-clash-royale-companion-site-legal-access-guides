@@ -1,8 +1,17 @@
+import { useEffect, useState } from 'react';
 import FeedbackForm from '../components/FeedbackForm';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Info, AlertTriangle } from 'lucide-react';
+import { Info, AlertTriangle, Globe } from 'lucide-react';
+import { getDisplayHost } from '../config/site';
 
 export default function AboutPage() {
+  const [currentHost, setCurrentHost] = useState<string>('');
+
+  useEffect(() => {
+    // Get the current browser host for display
+    setCurrentHost(getDisplayHost());
+  }, []);
+
   return (
     <div className="container py-12 md:py-16">
       <div className="max-w-4xl mx-auto space-y-12">
@@ -32,6 +41,41 @@ export default function AboutPage() {
               Our goal is to create a helpful community resource that respects the game, its
               developers, and its players. We believe in fair play and supporting the official game
               through proper channels.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card 
+          id="site-address-section" 
+          tabIndex={-1}
+          className="border-2 border-blue-500/50 bg-blue-500/5 scroll-mt-20 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-background"
+        >
+          <CardHeader>
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                <Globe className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              </div>
+              <CardTitle>About the Site Address</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4 text-muted-foreground">
+            {currentHost && (
+              <div className="bg-background/50 border border-border rounded-lg p-4 mb-4">
+                <p className="text-sm font-medium text-foreground mb-1">Current Browser Address:</p>
+                <code className="text-sm font-mono text-primary break-all">{currentHost}</code>
+              </div>
+            )}
+            <p>
+              The web address (URL) you see in your browser's address bar is controlled by deployment and hosting configuration, not by the site content or app interface. This site is deployed on the Internet Computer blockchain, which provides the technical infrastructure and assigns the domain.
+            </p>
+            <p>
+              While the site is branded as <strong>"ClashRoyaleHub"</strong> for identification and sharing purposes, the browser address reflects the deployment configuration (such as the canister URL or any custom domain configured by the site operator).
+            </p>
+            <p>
+              <strong>Important distinction:</strong> The branding text you see <em>inside</em> the site (like "ClashRoyaleHub" in the header and pages) is separate from the actual domain shown in your browser's address bar. Updating the app content does not change the deployment URL.
+            </p>
+            <p className="text-sm border-l-4 border-blue-500 pl-4 py-2 bg-blue-500/5">
+              <strong>Note:</strong> The browser address cannot be changed through the app interface—it requires deployment-level configuration changes outside of this application, such as setting up a custom domain or changing the canister deployment settings.
             </p>
           </CardContent>
         </Card>
