@@ -1,39 +1,28 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T15:01:53.488Z",
+  "generatedAt": "2026-02-06T15:57:57.383Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 2,
+    "total": 1,
+    "implemented": 1,
     "items": [
       {
-        "id": "REQ-12",
-        "summary": "Add a simple, user-friendly welcome/intro screen to the \"Ask Fred\" page (FredChatPage) that clearly explains what users can ask and provides a clear call-to-action to start chatting.",
+        "id": "REQ-24",
+        "summary": "Update all user-visible branding text that currently shows the site name as \"Clash Royale Hub\" so it displays exactly \"ClashRoyaleHub\" (no spaces), including the header brand label and the HTML document title.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/FredWelcomeIntro.tsx",
-          "frontend/src/pages/FredChatPage.tsx"
+          "frontend/index.html",
+          "frontend/src/components/SiteLayout.tsx",
+          "frontend/src/pages/AboutPage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/FredWelcomeIntro.tsx",
-          "frontend/src/pages/FredChatPage.tsx"
-        ]
-      },
-      {
-        "id": "REQ-13",
-        "summary": "Persist the Ask Fred welcome/intro screen dismissal so it does not reappear every time the user navigates away and back during typical use.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/hooks/useSessionFlag.ts",
-          "frontend/src/pages/FredChatPage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/hooks/useSessionFlag.ts",
-          "frontend/src/pages/FredChatPage.tsx"
+          "frontend/index.html",
+          "frontend/src/components/SiteLayout.tsx",
+          "frontend/src/pages/AboutPage.tsx"
         ]
       }
     ]
@@ -43,9 +32,9 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/FredWelcomeIntro.tsx",
-    "frontend/src/hooks/useSessionFlag.ts",
-    "frontend/src/pages/FredChatPage.tsx",
+    "frontend/index.html",
+    "frontend/src/components/SiteLayout.tsx",
+    "frontend/src/pages/AboutPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

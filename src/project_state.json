@@ -1,10 +1,12 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 9,
+  "projectStateVersion": 17,
   "summary": "Build a website that provides access to \"Clash Royale unblocked\" for the user.",
   "architectural_notes": [],
-  "known_issues": [],
-  "isFixRequest": false,
+  "known_issues": [
+    "Branding rename to \"ClashRoyaleHub\" did not update the link name/label; link still shows the old name after Version 7 launch."
+  ],
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-do-not-implement-host-embed-proxy-or-provide-any-mechanism-to-bypass-network-restrictions-paywalls-or-access-controls-unblocked-gameplay-for-clash-royale-instead-present-a-clear-message-that-the-site-only-provides-legal-official-access-options-and-informational-content",
@@ -109,6 +111,86 @@
         "REQ-13"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-expand-fred-s-deterministic-offline-clash-royale-knowledge-base-so-he-can-answer-substantially-more-questions-beyond-the-current-topics-while-keeping-all-responses-fully-local-no-network-calls-and-rules-based",
+      "title": "Expand Fred’s deterministic, offline Clash Royale knowledge base so he can answer substantially more questions beyond the current topics, while keeping all responses fully local (no network calls) and rules-based.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-improve-fred-s-intent-keyword-matching-so-that-common-variations-synonyms-and-card-deck-related-phrasing-are-more-reliably-routed-to-the-best-available-answer-without-introducing-nondeterministic-behavior",
+      "title": "Improve Fred’s intent/keyword matching so that common variations, synonyms, and card/deck-related phrasing are more reliably routed to the best available answer, without introducing nondeterministic behavior.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-ask-fred-ui-helper-text-to-reflect-fred-s-expanded-offline-topic-coverage-welcome-intro-topic-cards-and-the-in-chat-descriptive-text-keeping-all-user-facing-text-in-english-and-consistent-with-the-existing-disclaimer-about-being-offline-and-not-affiliated-with-supercell",
+      "title": "Update the Ask Fred UI helper text to reflect Fred’s expanded offline topic coverage (welcome intro topic cards and the in-chat descriptive text), keeping all user-facing text in English and consistent with the existing disclaimer about being offline and not affiliated with Supercell.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enforce-basic-posting-permissions-for-discussions-allow-anyone-to-read-threads-comments-but-require-internet-identity-authentication-to-create-threads-or-post-comments-replies-with-clear-error-messages-for-unauthenticated-users",
+      "title": "Enforce basic posting permissions for discussions: allow anyone to read threads/comments, but require Internet Identity authentication to create threads or post comments/replies, with clear error messages for unauthenticated users.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-new-frontend-page-for-discussions-that-lets-users-browse-threads-open-a-thread-detail-view-and-participate-via-posting-new-threads-and-threaded-comments-replies",
+      "title": "Create a new frontend page for Discussions that lets users browse threads, open a thread detail view, and participate via posting new threads and threaded comments (replies).",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-discussions-into-the-existing-page-based-routing-and-navigation-without-breaking-existing-pages-home-beginner-guide-deck-tips-ask-fred-about-admin",
+      "title": "Integrate Discussions into the existing page-based routing and navigation without breaking existing pages (Home, Beginner Guide, Deck Tips, Ask Fred, About, Admin).",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-react-query-hooks-mutations-for-discussions-to-fetch-thread-lists-fetch-a-thread-with-comments-create-a-thread-create-a-comment-and-create-a-reply-ensure-caches-invalidate-appropriately-after-posting-so-new-content-appears-after-submission",
+      "title": "Add React Query hooks/mutations for discussions to fetch thread lists, fetch a thread with comments, create a thread, create a comment, and create a reply; ensure caches invalidate appropriately after posting so new content appears after submission.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-lightweight-content-safety-abuse-guardrails-enforce-reasonable-maximum-lengths-for-thread-titles-bodies-and-comment-bodies-and-reject-empty-whitespace-only-submissions-in-both-frontend-validation-and-backend-validation",
+      "title": "Add lightweight content safety/abuse guardrails: enforce reasonable maximum lengths for thread titles/bodies and comment bodies, and reject empty/whitespace-only submissions in both frontend validation and backend validation.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-website-name-branding-to-clash-royale-hub-anywhere-it-is-user-visible-including-the-html-document-title-so-the-browser-tab-title-matches-the-site-header-branding",
+      "title": "Update the website name/branding to “Clash Royale Hub” anywhere it is user-visible, including the HTML document title, so the browser tab title matches the site header branding.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-all-user-visible-branding-text-that-currently-shows-the-site-name-as-clash-royale-hub-so-it-displays-exactly-clashroyalehub-no-spaces-including-the-header-brand-label-and-the-html-document-title",
+      "title": "Update all user-visible branding text that currently shows the site name as \"Clash Royale Hub\" so it displays exactly \"ClashRoyaleHub\" (no spaces), including the header brand label and the HTML document title.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -141,10 +223,36 @@
       "summary": "Add a simple welcome screen/intro on the Fred chat page so users know they can ask Fred anything.",
       "reqIds": [],
       "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Expand Fred’s offline knowledge base so he can answer a lot more Clash Royale questions (broader, more detailed coverage).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Add a Reddit-style comment/discussion system so users can chat about Clash Royale on the site (threaded comments, posting, and viewing discussions).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Add backend support for a Reddit-style discussion system with (a) discussion threads and (b) threaded comments/replies, stored in the Motoko canister and accessible via Candid methods.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Rename the website to \"Clash Royale Hub\" (update site name/branding).",
+      "reqIds": [],
+      "status": "pending"
     }
   ],
   "gameProjectType": "none",
-  "projectName": "Create a Clash Royale companion site (legal access + guides)",
+  "projectName": "Clash Royale Hub",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

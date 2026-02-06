@@ -7,9 +7,10 @@ import DeckTipsPage from './pages/DeckTipsPage';
 import AboutPage from './pages/AboutPage';
 import AdminFeedbackPage from './pages/AdminFeedbackPage';
 import FredChatPage from './pages/FredChatPage';
+import DiscussionsPage from './pages/DiscussionsPage';
 import { Toaster } from '@/components/ui/sonner';
 
-type Page = 'home' | 'beginner' | 'deck-tips' | 'about' | 'admin-feedback' | 'fred-chat';
+type Page = 'home' | 'beginner' | 'deck-tips' | 'about' | 'admin-feedback' | 'fred-chat' | 'discussions';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
@@ -28,6 +29,8 @@ export default function App() {
         return <AdminFeedbackPage />;
       case 'fred-chat':
         return <FredChatPage />;
+      case 'discussions':
+        return <DiscussionsPage />;
       default:
         return <HomePage />;
     }

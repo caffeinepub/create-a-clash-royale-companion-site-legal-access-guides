@@ -10,6 +10,22 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
+export interface Comment {
+  'id' : bigint,
+  'content' : string,
+  'parentCommentId' : [] | [bigint],
+  'children' : Array<Comment>,
+  'author' : Principal,
+  'timestamp' : bigint,
+}
+export interface DiscussionThread {
+  'id' : bigint,
+  'title' : string,
+  'content' : string,
+  'author' : Principal,
+  'timestamp' : bigint,
+  'comments' : Array<Comment>,
+}
 export interface Feedback {
   'name' : string,
   'email' : string,
@@ -21,10 +37,14 @@ export type UserRole = { 'admin' : null } |
   { 'guest' : null };
 export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
+  'addComment' : ActorMethod<[bigint, [] | [bigint], string], bigint>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
+  'createThread' : ActorMethod<[string, string], bigint>,
   'getAllFeedback' : ActorMethod<[], Array<Feedback>>,
+  'getAllThreads' : ActorMethod<[], Array<DiscussionThread>>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
+  'getThread' : ActorMethod<[bigint], [] | [DiscussionThread]>,
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,

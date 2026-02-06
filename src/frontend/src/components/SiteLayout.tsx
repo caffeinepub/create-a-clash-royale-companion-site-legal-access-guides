@@ -5,7 +5,7 @@ import LoginButton from './LoginButton';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
 import { useGetCallerUserRole } from '../hooks/useQueries';
 
-type Page = 'home' | 'beginner' | 'deck-tips' | 'about' | 'admin-feedback' | 'fred-chat';
+type Page = 'home' | 'beginner' | 'deck-tips' | 'about' | 'admin-feedback' | 'fred-chat' | 'discussions';
 
 interface SiteLayoutProps {
   children: React.ReactNode;
@@ -27,6 +27,7 @@ export default function SiteLayout({ children, currentPage, onNavigate }: SiteLa
     { id: 'home' as Page, label: 'Home' },
     { id: 'beginner' as Page, label: 'Beginner Guide' },
     { id: 'deck-tips' as Page, label: 'Deck Tips' },
+    { id: 'discussions' as Page, label: 'Discussions' },
     { id: 'fred-chat' as Page, label: 'Ask Fred' },
     { id: 'about' as Page, label: 'About' },
   ];
@@ -46,7 +47,7 @@ export default function SiteLayout({ children, currentPage, onNavigate }: SiteLa
               onClick={() => onNavigate('home')}
               className="text-xl font-bold tracking-tight hover:text-primary transition-colors"
             >
-              Clash Royale Hub
+              ClashRoyaleHub
             </button>
           </div>
 

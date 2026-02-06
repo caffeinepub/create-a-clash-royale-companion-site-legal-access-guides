@@ -24,7 +24,7 @@ export default function FredChatPage() {
     {
       id: '0',
       role: 'fred',
-      content: "Hi! I'm Fred, your Clash Royale helper. I can answer questions about elixir management, win conditions, deck archetypes, and spell selection. What would you like to know?",
+      content: "Hi! I'm Fred, your Clash Royale helper. I can answer questions about game mechanics, deck archetypes, battle interactions, deck building, and strategy. What would you like to know?",
       timestamp: new Date()
     }
   ]);
@@ -132,7 +132,7 @@ export default function FredChatPage() {
           <CardHeader className="border-b">
             <CardTitle>Chat with Fred</CardTitle>
             <CardDescription>
-              Ask about elixir, win conditions, deck archetypes, and more
+              Ask about mechanics, archetypes, interactions, deck building, and strategy
             </CardDescription>
           </CardHeader>
 
@@ -204,7 +204,7 @@ export default function FredChatPage() {
                 </Button>
               </div>
               <p className="text-xs text-muted-foreground mt-2">
-                Fred is an offline helper with limited knowledge. For detailed guides, visit our Beginner Guide and Deck Tips pages.
+                Fred is an offline helper with expanded knowledge of Clash Royale mechanics, archetypes, and strategy. For detailed guides, visit our Beginner Guide and Deck Tips pages.
               </p>
             </div>
           </CardContent>

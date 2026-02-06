@@ -8,6 +8,7 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const Comment = IDL.Rec();
 export const UserRole = IDL.Variant({
   'admin' : IDL.Null,
   'user' : IDL.Null,
@@ -18,14 +19,40 @@ export const Feedback = IDL.Record({
   'email' : IDL.Text,
   'message' : IDL.Text,
 });
+Comment.fill(
+  IDL.Record({
+    'id' : IDL.Nat64,
+    'content' : IDL.Text,
+    'parentCommentId' : IDL.Opt(IDL.Nat64),
+    'children' : IDL.Vec(Comment),
+    'author' : IDL.Principal,
+    'timestamp' : IDL.Int,
+  })
+);
+export const DiscussionThread = IDL.Record({
+  'id' : IDL.Nat64,
+  'title' : IDL.Text,
+  'content' : IDL.Text,
+  'author' : IDL.Principal,
+  'timestamp' : IDL.Int,
+  'comments' : IDL.Vec(Comment),
+});
 export const UserProfile = IDL.Record({ 'name' : IDL.Text });
 
 export const idlService = IDL.Service({
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+  'addComment' : IDL.Func(
+      [IDL.Nat64, IDL.Opt(IDL.Nat64), IDL.Text],
+      [IDL.Nat64],
+      [],
+    ),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+  'createThread' : IDL.Func([IDL.Text, IDL.Text], [IDL.Nat64], []),
   'getAllFeedback' : IDL.Func([], [IDL.Vec(Feedback)], ['query']),
+  'getAllThreads' : IDL.Func([], [IDL.Vec(DiscussionThread)], ['query']),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getThread' : IDL.Func([IDL.Nat64], [IDL.Opt(DiscussionThread)], ['query']),
   'getUserProfile' : IDL.Func(
       [IDL.Principal],
       [IDL.Opt(UserProfile)],
@@ -39,6 +66,7 @@ export const idlService = IDL.Service({
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
+  const Comment = IDL.Rec();
   const UserRole = IDL.Variant({
     'admin' : IDL.Null,
     'user' : IDL.Null,
@@ -49,14 +77,40 @@ export const idlFactory = ({ IDL }) => {
     'email' : IDL.Text,
     'message' : IDL.Text,
   });
+  Comment.fill(
+    IDL.Record({
+      'id' : IDL.Nat64,
+      'content' : IDL.Text,
+      'parentCommentId' : IDL.Opt(IDL.Nat64),
+      'children' : IDL.Vec(Comment),
+      'author' : IDL.Principal,
+      'timestamp' : IDL.Int,
+    })
+  );
+  const DiscussionThread = IDL.Record({
+    'id' : IDL.Nat64,
+    'title' : IDL.Text,
+    'content' : IDL.Text,
+    'author' : IDL.Principal,
+    'timestamp' : IDL.Int,
+    'comments' : IDL.Vec(Comment),
+  });
   const UserProfile = IDL.Record({ 'name' : IDL.Text });
   
   return IDL.Service({
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+    'addComment' : IDL.Func(
+        [IDL.Nat64, IDL.Opt(IDL.Nat64), IDL.Text],
+        [IDL.Nat64],
+        [],
+      ),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+    'createThread' : IDL.Func([IDL.Text, IDL.Text], [IDL.Nat64], []),
     'getAllFeedback' : IDL.Func([], [IDL.Vec(Feedback)], ['query']),
+    'getAllThreads' : IDL.Func([], [IDL.Vec(DiscussionThread)], ['query']),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getThread' : IDL.Func([IDL.Nat64], [IDL.Opt(DiscussionThread)], ['query']),
     'getUserProfile' : IDL.Func(
         [IDL.Principal],
         [IDL.Opt(UserProfile)],

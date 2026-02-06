@@ -1,47 +1,32 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Ask Fred welcome/intro screen with session-persisted dismissal",
+  "title": "Update site branding label and document title to ClashRoyaleHub",
   "requirements": [
     {
-      "id": "REQ-12",
-      "summary": "Show a welcome/intro view on the Ask Fred page before the chat UI, with clear examples and a prominent start action while keeping the existing disclaimer unchanged.",
+      "id": "REQ-24",
+      "summary": "Replace all user-visible instances of the site name \"Clash Royale Hub\" with \"ClashRoyaleHub\" (no spaces), including header branding and HTML document title.",
       "acceptanceCriteria": [
-        "When a user opens the Ask Fred page, they see an intro/welcome view before the chat history (at least on first visit).",
-        "The welcome view includes English user-facing text that communicates: (1) Fred is a Clash Royale strategy helper, (2) example topics users can ask about (e.g., elixir, win conditions, deck archetypes, spell choices), and (3) a prominent action (e.g., \"Start chatting\") that takes the user into the chat UI.",
-        "After the user dismisses/starts the chat from the welcome view, the normal chat UI is shown and the input is focused.",
-        "The existing disclaimer remains visible and unchanged in meaning (still states Fred is offline/limited knowledge, informational only, not affiliated with Supercell, and no unblocked/bypass help)."
+        "The header brand/button text displays exactly \"ClashRoyaleHub\" on all pages.",
+        "The browser tab/document title displays exactly \"ClashRoyaleHub\".",
+        "Any page copy that refers to the site name (e.g., About page mission text) uses \"ClashRoyaleHub\" (no spaces).",
+        "There are no remaining user-visible instances of the exact string \"Clash Royale Hub\" used as the site name anywhere in the frontend."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/FredWelcomeIntro.tsx",
-          "operation": "create",
-          "description": "Create a reusable welcome/intro panel component for Ask Fred with explanatory text, example question/topic list, and a prominent \"Start chatting\" CTA. Use existing shadcn-ui components (e.g., Card/Button) for consistent styling; verify the component's usage instructions before implementing."
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Update the HTML <title> from \"Clash Royale Hub\" to exactly \"ClashRoyaleHub\" to match required document title branding."
         },
         {
-          "path": "frontend/src/pages/FredChatPage.tsx",
+          "path": "frontend/src/components/SiteLayout.tsx",
           "operation": "modify",
-          "description": "Add conditional rendering so first-time (per session) visitors see the new welcome/intro panel before the chat history. Ensure the existing disclaimer (FRED_DISCLAIMER) remains visible and unchanged in meaning. When the user clicks the CTA, transition to the chat UI and programmatically focus the message input (Textarea). Use existing shadcn-ui components already present on this page; verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-13",
-      "summary": "Persist dismissal of the Ask Fred intro during the browser session and provide a non-intrusive way to re-open the intro.",
-      "acceptanceCriteria": [
-        "After the user starts/dismisses the welcome screen once, revisiting the Ask Fred page within the same browser session does not show the welcome screen again (chat UI appears directly).",
-        "Provide a simple way to re-open the intro (e.g., a small \"About Fred\" / \"Show intro\" action) without interfering with chat usage."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/hooks/useSessionFlag.ts",
-          "operation": "create",
-          "description": "Create a small hook to read/write a boolean flag in sessionStorage (e.g., intro dismissed) to persist state across navigation within the same browser session."
+          "description": "Update the header brand label/button text from \"Clash Royale Hub\" to exactly \"ClashRoyaleHub\" so the site name displays correctly across all pages."
         },
         {
-          "path": "frontend/src/pages/FredChatPage.tsx",
+          "path": "frontend/src/pages/AboutPage.tsx",
           "operation": "modify",
-          "description": "Integrate session-based persistence for the intro dismissal (via the new hook) so the intro is shown only until dismissed in the current session. Add a small \"About Fred\" / \"Show intro\" action in the Ask Fred UI (e.g., in the chat header area) that reopens the intro without disrupting normal chat usage; use existing shadcn-ui Button styling patterns; verify the component's usage instructions before implementing."
+          "description": "Update About page mission copy that references the site name (currently \"Clash Royale Hub\") to display exactly \"ClashRoyaleHub\" (no spaces)."
         }
       ]
     }

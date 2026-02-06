@@ -24,7 +24,7 @@ export default function AboutPage() {
           </CardHeader>
           <CardContent className="space-y-4 text-muted-foreground">
             <p>
-              Clash Royale Hub is an informational companion site dedicated to helping players
+              ClashRoyaleHub is an informational companion site dedicated to helping players
               improve their skills, learn strategies, and access official game resources. We provide
               beginner guides, deck building tips, and links to legitimate ways to play Clash Royale.
             </p>

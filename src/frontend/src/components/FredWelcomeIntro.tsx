@@ -1,4 +1,4 @@
-import { Sparkles, Zap, Target, Layers, Wand2 } from 'lucide-react';
+import { Sparkles, Zap, Target, Layers, Wand2, Swords, Lightbulb, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -8,10 +8,12 @@ interface FredWelcomeIntroProps {
 
 export default function FredWelcomeIntro({ onStartChat }: FredWelcomeIntroProps) {
   const exampleTopics = [
-    { icon: Zap, label: 'Elixir Management', description: 'Learn to manage your resources efficiently' },
-    { icon: Target, label: 'Win Conditions', description: 'Understand cards that deal tower damage' },
-    { icon: Layers, label: 'Deck Archetypes', description: 'Explore beatdown, cycle, control, siege & more' },
-    { icon: Wand2, label: 'Spell Selection', description: 'Choose the right spells for your deck' },
+    { icon: Zap, label: 'Game Mechanics', description: 'Elixir, tower targeting, card roles & damage types' },
+    { icon: Layers, label: 'Deck Archetypes', description: 'Beatdown, cycle, control, siege, bait, bridge spam & more' },
+    { icon: Swords, label: 'Battle Interactions', description: 'Kiting, spell timing, punishing & King activation' },
+    { icon: Shield, label: 'Deck Building', description: 'Win conditions, spells, air defense & balance' },
+    { icon: Target, label: 'Strategy Tips', description: 'Elixir advantage, starting hands & defending threats' },
+    { icon: Lightbulb, label: 'Advanced Tactics', description: 'Split lane pressure, spell packages & more' },
   ];
 
   return (
@@ -23,8 +25,8 @@ export default function FredWelcomeIntro({ onStartChat }: FredWelcomeIntroProps)
         <div>
           <h2 className="text-3xl font-bold mb-2">Meet Fred</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Your friendly Clash Royale strategy helper. Fred can answer questions about game basics, 
-            deck building, and battle tactics to help you improve your gameplay.
+            Your friendly Clash Royale strategy helper. Fred can answer questions about game mechanics, 
+            deck building, battle tactics, and advanced strategies to help you improve your gameplay.
           </p>
         </div>
       </div>
@@ -65,7 +67,7 @@ export default function FredWelcomeIntro({ onStartChat }: FredWelcomeIntroProps)
           Start Chatting with Fred
         </Button>
         <p className="text-sm text-muted-foreground">
-          Fred is ready to answer your Clash Royale questions!
+          Fred provides offline, informational guidance based on Clash Royale fundamentals
         </p>
       </div>
     </div>

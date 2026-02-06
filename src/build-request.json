@@ -1,54 +1,36 @@
 {
   "kind": "build_request",
-  "title": "Add a simple welcome screen to the Ask Fred chat page",
+  "title": "Change displayed site name/label to “ClashRoyaleHub” (no spaces)",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-12",
-      "text": "Add a simple, user-friendly welcome/intro screen to the \"Ask Fred\" page (FredChatPage) that clearly explains what users can ask and provides a clear call-to-action to start chatting.",
+      "id": "REQ-24",
+      "text": "Update all user-visible branding text that currently shows the site name as \"Clash Royale Hub\" so it displays exactly \"ClashRoyaleHub\" (no spaces), including the header brand label and the HTML document title.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-5"
+          "msg-6"
         ],
         "quotes": [
-          "Yes"
+          "It didn’t work the link still stayed the Same I want the links name changed to ClashRoyaleHub"
         ]
       },
       "acceptanceCriteria": [
-        "When a user opens the Ask Fred page, they see an intro/welcome view before the chat history (at least on first visit).",
-        "The welcome view includes English user-facing text that communicates: (1) Fred is a Clash Royale strategy helper, (2) example topics users can ask about (e.g., elixir, win conditions, deck archetypes, spell choices), and (3) a prominent action (e.g., \"Start chatting\") that takes the user into the chat UI.",
-        "After the user dismisses/starts the chat from the welcome view, the normal chat UI is shown and the input is focused.",
-        "The existing disclaimer remains visible and unchanged in meaning (still states Fred is offline/limited knowledge, informational only, not affiliated with Supercell, and no unblocked/bypass help)."
-      ]
-    },
-    {
-      "id": "REQ-13",
-      "text": "Persist the Ask Fred welcome/intro screen dismissal so it does not reappear every time the user navigates away and back during typical use.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-5"
-        ],
-        "quotes": [
-          "Yes"
-        ]
-      },
-      "acceptanceCriteria": [
-        "After the user starts/dismisses the welcome screen once, revisiting the Ask Fred page within the same browser session does not show the welcome screen again (chat UI appears directly).",
-        "Provide a simple way to re-open the intro (e.g., a small \"About Fred\" / \"Show intro\" action) without interfering with chat usage."
+        "The header brand/button text displays exactly \"ClashRoyaleHub\" on all pages.",
+        "The browser tab/document title displays exactly \"ClashRoyaleHub\".",
+        "Any page copy that refers to the site name (e.g., About page mission text) uses \"ClashRoyaleHub\" (no spaces).",
+        "There are no remaining user-visible instances of the exact string \"Clash Royale Hub\" used as the site name anywhere in the frontend."
       ]
     }
   ],
   "constraints": [
-    "Do not add any network calls or external AI integrations for Fred; keep responses fully local and deterministic.",
-    "Do not implement or suggest any method to bypass network restrictions/paywalls/access controls or provide “unblocked” gameplay.",
-    "Do not edit files under frontend/src/components/ui (Shadcn UI sources) or other paths listed as immutable in SYSTEM_CONTEXT."
+    "Do not modify files under frontend/src/components/ui (read-only).",
+    "Do not change Internet Identity/authentication behavior.",
+    "Do not implement any mechanism to bypass network restrictions, paywalls, or access controls (no “unblocked” gameplay)."
   ],
   "nonGoals": [
-    "Changing the Fred knowledge base content/logic beyond what is required to support the welcome screen.",
-    "Adding user accounts, saving chat history to the backend, or any real-time/multiplayer functionality.",
-    "Redesigning global site navigation or changing existing pages beyond the Ask Fred page behavior."
+    "Changing the actual deployed URL/canister domain or any external link destinations (only the displayed site name/label should change).",
+    "Backend changes or data migrations."
   ],
   "imageRequirements": {
     "required": [],

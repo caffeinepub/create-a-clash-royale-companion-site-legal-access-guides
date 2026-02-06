@@ -2,11 +2,12 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-a-simple-user-friendly-welcome-intro-screen-to-the-ask-fred-page-fredchatpage-that-clearly-explains-what-users-can-ask-and-provides-a-clear-call-to-action-to-start-chatting",
-      "featureTitle": "Add a simple, user-friendly welcome/intro screen to the \"Ask Fred\" page (FredChatPage) that clearly explains what users can ask and provides a clear call-to-action to start chatting.",
+      "featureId": "feature-update-all-user-visible-branding-text-that-currently-shows-the-site-name-as-clash-royale-hub-so-it-displays-exactly-clashroyalehub-no-spaces-including-the-header-brand-label-and-the-html-document-title",
+      "featureTitle": "Update all user-visible branding text that currently shows the site name as \"Clash Royale Hub\" so it displays exactly \"ClashRoyaleHub\" (no spaces), including the header brand label and the HTML document title.",
       "files": [
-        "frontend/src/components/FredWelcomeIntro.tsx",
-        "frontend/src/pages/FredChatPage.tsx"
+        "frontend/index.html",
+        "frontend/src/components/SiteLayout.tsx",
+        "frontend/src/pages/AboutPage.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -17,27 +18,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-12"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-persist-the-ask-fred-welcome-intro-screen-dismissal-so-it-does-not-reappear-every-time-the-user-navigates-away-and-back-during-typical-use",
-      "featureTitle": "Persist the Ask Fred welcome/intro screen dismissal so it does not reappear every time the user navigates away and back during typical use.",
-      "files": [
-        "frontend/src/hooks/useSessionFlag.ts",
-        "frontend/src/pages/FredChatPage.tsx"
-      ],
-      "components": [
-        "authorization@4.0.0",
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-13"
+        "REQ-24"
       ],
       "confidence": "high"
     }
