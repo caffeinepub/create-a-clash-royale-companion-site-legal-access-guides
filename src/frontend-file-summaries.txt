@@ -1,6 +1,6 @@
 {
   "frontend/src/App.tsx": "Main application component with page-based routing including the new 'discussions' page, theme provider integration, and toast notifications.",
-  "frontend/src/components/SiteLayout.tsx": "Responsive layout component with header navigation (now displaying \"ClashRoyaleHub\" as the site brand), mobile menu with close-on-navigation behavior, and footer with legal disclaimers and creator attribution.",
+  "frontend/src/components/SiteLayout.tsx": "Responsive layout component with header navigation (now displaying \"ClashRoyalHub\" as the site brand), mobile menu with close-on-navigation behavior, and footer with legal disclaimers and creator attribution.",
   "frontend/src/components/LoginButton.tsx": "Internet Identity login/logout button component with loading states and query cache clearing on logout.",
   "frontend/src/components/ContentSection.tsx": "Reusable wrapper component for content sections with consistent prose styling using Tailwind typography.",
   "frontend/src/components/FeedbackForm.tsx": "Feedback submission form with validation (required message, 1000 char limit) using shadcn/ui components and React Query mutation.",

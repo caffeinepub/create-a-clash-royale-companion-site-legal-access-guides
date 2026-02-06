@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 17,
+  "projectStateVersion": 19,
   "summary": "Build a website that provides access to \"Clash Royale unblocked\" for the user.",
   "architectural_notes": [],
   "known_issues": [
@@ -191,6 +191,14 @@
         "REQ-24"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-top-left-header-brand-link-label-the-button-that-navigates-to-home-to-display-exactly-clashroyalhub",
+      "title": "Update the top-left header brand link/label (the button that navigates to Home) to display exactly \"ClashRoyalHub\".",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -247,6 +255,12 @@
     {
       "id": "AR-9",
       "summary": "Rename the website to \"Clash Royale Hub\" (update site name/branding).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Update the top header link/label to display the correct site name branding (user requested changing it to \"ClashRoyalHub\").",
       "reqIds": [],
       "status": "pending"
     }

@@ -1,28 +1,22 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T15:57:57.381Z",
-  "summary": "The diff updates the header brand label to \"ClashRoyaleHub\" and updates the HTML document title to \"ClashRoyaleHub\". The About page mission text also uses \"ClashRoyaleHub\". However, based on the limited set of modified files shown, it’s not possible to confirm that *all* remaining user-visible instances of the exact string \"Clash Royale Hub\" across the entire frontend were updated.",
-  "missing_requirements": [
+  "generatedAt": "2026-02-06T16:03:52.774Z",
+  "summary": "REQ-25 appears implemented: the global header’s top-left brand button now renders the text \"ClashRoyalHub\" and its click handler still navigates to the Home page via onNavigate('home'). No changes to other navigation item labels are shown in the provided SiteLayout diff excerpt.",
+  "missing_requirements": [],
+  "hallucinated_features": [
     {
-      "id": "REQ-24",
-      "requirement": "There are no remaining user-visible instances of the exact string \"Clash Royale Hub\" used as the site name anywhere in the frontend.",
-      "reason": "Only a small subset of files are shown as modified (SiteLayout.tsx, AboutPage.tsx, index.html). The diff summary does not provide evidence of a repo-wide update/search to ensure there are zero remaining occurrences in other pages/components.",
+      "description": "Documentation/summary text claims the About page now references \"ClashRoyaleHub\" (different spelling/capitalization) even though the BuildRequest only asked to update the header brand label to \"ClashRoyalHub\".",
+      "reason": "This is an additional branding-related change (or claim of a change) beyond the requested header label update, and it also introduces a different string (\"ClashRoyaleHub\") than the required \"ClashRoyalHub\".",
       "evidence": [
-        "frontend/src/components/SiteLayout.tsx",
-        "frontend/src/pages/AboutPage.tsx",
-        "frontend/index.html",
         "frontend-file-summaries.txt"
       ]
     }
   ],
-  "hallucinated_features": [],
-  "confidence": 0.62,
+  "confidence": 0.74,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/index.html",
     "frontend/src/components/SiteLayout.tsx",
-    "frontend/src/pages/AboutPage.tsx",
     "project_state.json"
   ]
 }

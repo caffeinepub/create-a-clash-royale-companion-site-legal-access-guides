@@ -2,12 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-all-user-visible-branding-text-that-currently-shows-the-site-name-as-clash-royale-hub-so-it-displays-exactly-clashroyalehub-no-spaces-including-the-header-brand-label-and-the-html-document-title",
-      "featureTitle": "Update all user-visible branding text that currently shows the site name as \"Clash Royale Hub\" so it displays exactly \"ClashRoyaleHub\" (no spaces), including the header brand label and the HTML document title.",
+      "featureId": "feature-update-the-top-left-header-brand-link-label-the-button-that-navigates-to-home-to-display-exactly-clashroyalhub",
+      "featureTitle": "Update the top-left header brand link/label (the button that navigates to Home) to display exactly \"ClashRoyalHub\".",
       "files": [
-        "frontend/index.html",
-        "frontend/src/components/SiteLayout.tsx",
-        "frontend/src/pages/AboutPage.tsx"
+        "frontend/src/components/SiteLayout.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -18,7 +16,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-24"
+        "REQ-25"
       ],
       "confidence": "high"
     }

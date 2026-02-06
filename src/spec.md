@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Update all user-visible branding text to display the site name exactly as “ClashRoyaleHub” (no spaces).
+**Goal:** Change the global header brand link text to exactly “ClashRoyalHub” while preserving its Home navigation behavior.
 
 **Planned changes:**
-- Replace any user-visible instances of the site name string “Clash Royale Hub” with “ClashRoyaleHub” across the frontend UI copy.
-- Update the header brand/label text to display exactly “ClashRoyaleHub” on all pages.
-- Update the HTML document/browser tab title to display exactly “ClashRoyaleHub”.
+- Update the top-left header brand link/label text to render exactly “ClashRoyalHub”.
+- Ensure the brand label remains clickable and continues to navigate to the Home page.
+- Leave all other navigation labels unchanged.
 
-**User-visible outcome:** The site name appears consistently as “ClashRoyaleHub” (including the header label and browser tab title), with no remaining “Clash Royale Hub” text shown anywhere in the frontend.
+**User-visible outcome:** The header’s top-left brand label displays “ClashRoyalHub” and still takes the user to Home when clicked.

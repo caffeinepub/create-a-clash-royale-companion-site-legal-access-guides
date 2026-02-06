@@ -1,39 +1,47 @@
 {
   "kind": "build_request",
-  "title": "Change displayed site name/label to “ClashRoyaleHub” (no spaces)",
+  "title": "Update header brand link text to ClashRoyalHub",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-24",
-      "text": "Update all user-visible branding text that currently shows the site name as \"Clash Royale Hub\" so it displays exactly \"ClashRoyaleHub\" (no spaces), including the header brand label and the HTML document title.",
+      "id": "REQ-25",
+      "text": "Update the top-left header brand link/label (the button that navigates to Home) to display exactly \"ClashRoyalHub\".",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-6"
         ],
         "quotes": [
-          "It didn’t work the link still stayed the Same I want the links name changed to ClashRoyaleHub"
+          "Take that link at the top and change it to ClashRoyalHub"
         ]
       },
       "acceptanceCriteria": [
-        "The header brand/button text displays exactly \"ClashRoyaleHub\" on all pages.",
-        "The browser tab/document title displays exactly \"ClashRoyaleHub\".",
-        "Any page copy that refers to the site name (e.g., About page mission text) uses \"ClashRoyaleHub\" (no spaces).",
-        "There are no remaining user-visible instances of the exact string \"Clash Royale Hub\" used as the site name anywhere in the frontend."
+        "In the global header, the brand label text renders as exactly \"ClashRoyalHub\" (matching capitalization and spelling).",
+        "Clicking the brand label still navigates to the Home page.",
+        "No other navigation labels (Home, Beginner Guide, Deck Tips, Discussions, Ask Fred, About, Admin) are changed."
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/components/ui (read-only).",
-    "Do not change Internet Identity/authentication behavior.",
-    "Do not implement any mechanism to bypass network restrictions, paywalls, or access controls (no “unblocked” gameplay)."
+    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "Keep all user-facing text in English."
   ],
   "nonGoals": [
-    "Changing the actual deployed URL/canister domain or any external link destinations (only the displayed site name/label should change).",
-    "Backend changes or data migrations."
+    "Do not change the HTML document title or other site branding text unless explicitly requested.",
+    "Do not modify routing behavior beyond ensuring the brand label still navigates to Home."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

@@ -47,7 +47,7 @@ export default function SiteLayout({ children, currentPage, onNavigate }: SiteLa
               onClick={() => onNavigate('home')}
               className="text-xl font-bold tracking-tight hover:text-primary transition-colors"
             >
-              ClashRoyaleHub
+              ClashRoyalHub
             </button>
           </div>
 

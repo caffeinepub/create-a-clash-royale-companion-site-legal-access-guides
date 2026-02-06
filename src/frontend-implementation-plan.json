@@ -1,32 +1,21 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Update site branding label and document title to ClashRoyaleHub",
+  "title": "Update header brand label to ClashRoyalHub",
   "requirements": [
     {
-      "id": "REQ-24",
-      "summary": "Replace all user-visible instances of the site name \"Clash Royale Hub\" with \"ClashRoyaleHub\" (no spaces), including header branding and HTML document title.",
+      "id": "REQ-25",
+      "summary": "Change the global header brand link/label text to exactly \"ClashRoyalHub\" while keeping Home navigation behavior unchanged.",
       "acceptanceCriteria": [
-        "The header brand/button text displays exactly \"ClashRoyaleHub\" on all pages.",
-        "The browser tab/document title displays exactly \"ClashRoyaleHub\".",
-        "Any page copy that refers to the site name (e.g., About page mission text) uses \"ClashRoyaleHub\" (no spaces).",
-        "There are no remaining user-visible instances of the exact string \"Clash Royale Hub\" used as the site name anywhere in the frontend."
+        "In the global header, the brand label text renders as exactly \"ClashRoyalHub\" (matching capitalization and spelling).",
+        "Clicking the brand label still navigates to the Home page.",
+        "No other navigation labels (Home, Beginner Guide, Deck Tips, Discussions, Ask Fred, About, Admin) are changed."
       ],
       "file_operations": [
         {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "Update the HTML <title> from \"Clash Royale Hub\" to exactly \"ClashRoyaleHub\" to match required document title branding."
-        },
-        {
           "path": "frontend/src/components/SiteLayout.tsx",
           "operation": "modify",
-          "description": "Update the header brand label/button text from \"Clash Royale Hub\" to exactly \"ClashRoyaleHub\" so the site name displays correctly across all pages."
-        },
-        {
-          "path": "frontend/src/pages/AboutPage.tsx",
-          "operation": "modify",
-          "description": "Update About page mission copy that references the site name (currently \"Clash Royale Hub\") to display exactly \"ClashRoyaleHub\" (no spaces)."
+          "description": "Update the header brand button label text from \"ClashRoyaleHub\" to exactly \"ClashRoyalHub\" without altering the onClick handler that navigates to the Home page, and without changing any other nav item labels."
         }
       ]
     }
